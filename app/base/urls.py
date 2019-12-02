@@ -10,6 +10,7 @@ import tabs.views
 urlpatterns = [
     path("admin/", admin.site.urls),
     re_path('home/', tabs.views.home, name ='home'),
+    re_path(r'^api/auth/', include('accounts.api.urls'), name='api-auth'),
 
     # API
     re_path(r'api/documents/', include("products.api.urls")),
