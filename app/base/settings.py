@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "rest_framework",
-    "products",
+    "rest_framework.authtoken",
     "tabs",
     "accounts"
 ]
@@ -138,6 +138,25 @@ STATICFILES_DIRS = [
 STATIC_ROOT="/staticfiles/"
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICTION_CLASSES":
+        ('rest_framework.authentication.TokenAuthentication'),
+    "DEFAULT_PERMISSION_CLASSES":(
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+
+
+'''
+curl -X POST -d "username=mollytuttle&password=1!Iksarmanssss" http//localhost:8000/api/auth/token
+'''
+
+
+
+
+
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
