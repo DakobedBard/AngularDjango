@@ -4,15 +4,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
-import upload.views
-
-
-
-from pages.views import FrontendRenderView
+import tabs.views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    re_path('home/', tabs.views.home, name ='home'),
 
     # API
     re_path(r'api/documents/', include("products.api.urls")),

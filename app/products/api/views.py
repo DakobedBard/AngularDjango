@@ -1,7 +1,7 @@
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-# from products.models import Product
-from upload.models import Document, StyleTransferModel
+
+from products.models import Document, StyleTransferModel
 from django.db.models import Q
 from .serializers import  DocumentSerializer, StyleTransferSerializer, DocumentCreatetSerializer, DocumentListSerializer #ProductSerializer, DocumentSerializer
 

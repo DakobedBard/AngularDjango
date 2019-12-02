@@ -1,19 +1,9 @@
 from rest_framework import serializers
-# from products.models import Product
-from upload.models import Document, StyleTransferModel
+from products.models import Document, StyleTransferModel
 from django.contrib.auth import get_user_model
-# class ProductSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Product
-#         fields = [
-#             'id',
-#             'title',
-#             'description',
-#             'price'
-#         ]
 
 
-User = get_user_model()
+from django.contrib.auth.models import User
 
 class DocumentCreatetSerializer(serializers.ModelSerializer):
     class Meta:
