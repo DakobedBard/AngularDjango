@@ -5,14 +5,15 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView
 from rest_framework.authtoken import views
-from accounts.views import login
+from accounts.views import login, signup
 import tabs.views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     re_path('home/', tabs.views.home, name ='home'),
-    path('login/', login, name='login'),
+    path('login/', login, name='loginClient'),
+    path('singup/', signup, name='signup'),
 
     # Users API
     re_path(r'^api/auth/', include('accounts.api.urls'), name='api-auth'),
