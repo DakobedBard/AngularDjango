@@ -17,6 +17,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth.forms import UsernameField
+import requests
 class LoginForm(forms.Form):
 
     email = forms.EmailField(max_length=254)
@@ -26,6 +27,8 @@ class LoginForm(forms.Form):
         widget=forms.HiddenInput()
     )
     def is_valid(self):
+        r = requests.get('https://xkcd.com/1906/')
+        print("The status code is " + str(r.status_code))
         return True
 
 

@@ -19,7 +19,6 @@ def login(request, *args, **kwargs):
         else:
             print("THe form is not valid")
             return redirect('home')
-
     else:
         form = LoginForm()
         return render(request, "registration/login.html", {
