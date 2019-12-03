@@ -18,13 +18,16 @@ from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth.forms import UsernameField
 class LoginForm(forms.Form):
-    password = forms.CharField(max_length=30)
-    email = forms.EmailField(max_length=254)
 
+    email = forms.EmailField(max_length=254)
+    password = forms.CharField(max_length=30)
     source = forms.CharField(       # A hidden input for internal use
         max_length=50,              # tell from which page the user sent the message
         widget=forms.HiddenInput()
     )
+    def is_valid(self):
+        return True
+
 
 class SignUPForm(forms.Form):
     username = forms.CharField(max_length=254)
