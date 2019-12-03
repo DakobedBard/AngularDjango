@@ -27,6 +27,7 @@ run pip install -U Celery
 run pip install djangorestframework-jwt
 run pip install --upgrade awscli
 run pip install pytest
+run pip install djoser
 run pip install Pillow
 run pip install djangorestframework
 COPY ./runtests.py /usr/src/app/runtests.py

@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "tabs",
-    "accounts"
+    "accounts",
+    "authapp",
+    "djoser"
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -150,7 +152,7 @@ REST_FRAMEWORK = {
 
 
 '''
-curl -X POST -d "username=mollytuttle&password=1!Iksarmanssss" http//localhost:8000/api/auth/token
+curl -X POST -d "username=mollytuttle&password=1!Iksarmanssss" http//localhost:8000/api-auth-token
 '''
 
 
