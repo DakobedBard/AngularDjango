@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab.component.css']
 })
 export class TabComponent implements OnInit {
-
+  tab_string =  "E / / / | Am / B / ||" 
   constructor() { }
 
-  ngOnInit() {
+    ngOnInit() {
   }
 
 }
