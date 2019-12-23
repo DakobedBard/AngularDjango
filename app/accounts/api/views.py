@@ -34,6 +34,13 @@ User = get_user_model()
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = UserCreateSerializer
+        if serializer.validate("",data):
+            return Response(data, status=HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
 class UserLoginView(APIView):
