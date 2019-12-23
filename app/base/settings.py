@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "tabs",
     "accounts",
+    "uploadapp"
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
