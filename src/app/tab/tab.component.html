@@ -4,10 +4,16 @@
  >
 </app-tab-line> -->
 
-<app-tab-line [childMessage]="tab_string">
+<li *ngFor="let line of tab">
+  <app-tab-line [tab_string]= line.tab_string>
+  </app-tab-line>
+</li>
+
+<!-- 
+<app-tab-line [tab_string]="tab_string">
 </app-tab-line>
 `
 
-<app-tab-line [childMessage]="tab_string2">
+<app-tab-line [tab_string]="tab_string2">
 </app-tab-line>
-`
+` -->

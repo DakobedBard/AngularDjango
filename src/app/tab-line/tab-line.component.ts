@@ -7,11 +7,11 @@ import { Hero } from '../hero';
 })
 export class TabLineComponent implements OnInit {
   message: String;
-  @Input() childMessage: string;
+  @Input() tab_string: string;
   constructor() { }
 
   ngOnInit() {
-    this.message = this.childMessage;
+    this.message = this.tab_string;
   }
 
 }

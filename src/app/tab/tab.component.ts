@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { TabService } from  '../tab.service';
 
 const HEROES = [
   {name: 'Dr IQ'},
@@ -23,7 +23,7 @@ export class TabComponent implements OnInit {
 
   heroes = HEROES;
   parentMessage ="ParentMessagee";
-  constructor() { }
+  constructor(private uploadService: TabService) { }
   tab = [
     {tab_string: 'E / / / | Am / B / ||'},
     {tab_string: 'G / / / | Bm / C / ||'},
