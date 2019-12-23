@@ -1,0 +1,12 @@
+<h3>Documents</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let document of documents" class="row-4-2"
+      routerLink="/detail/{{document.id}}">
+    <div class="module document">
+      <h4>{{document.name}}</h4>
+    </div>
+  </a>
+  <br>
+</div>
+<br>
+<app-document-search></app-document-search>

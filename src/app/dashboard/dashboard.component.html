@@ -1,0 +1,42 @@
+
+<mat-grid-list cols="2" rowHeight="2:1" gutterSize="3px">
+  <mat-grid-tile >
+    <mat-list>
+      <h3 mat-subheader>Documents</h3>
+      <mat-list-item *ngFor="let document of documents">
+        <a routerLink="/detail/{{document.id}}">
+        <h4 mat-line>{{document.name}}</h4>
+        </a>
+      </mat-list-item>
+  
+
+    </mat-list>
+    
+  </mat-grid-tile >
+  <mat-grid-tile rowspan="2" style="background-color: black;">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Angular Fundamentals
+        </mat-panel-title>
+        <mat-panel-description>
+          Total Duration: 3 hours
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+        This is the panel conent. And course details
+      </p>
+    </mat-expansion-panel>
+  </mat-grid-tile>
+  <mat-grid-tile style="background-color: coral;">
+    <mat-tab-group>
+      <mat-tab label="Angular">Angular</mat-tab>
+      <mat-tab label="React">React</mat-tab>
+      <mat-tab label="Vue">Vue</mat-tab>
+    </mat-tab-group>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<app-upload></app-upload>
+<app-document-search></app-document-search>
