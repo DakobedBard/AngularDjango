@@ -20,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { TabComponent } from './tab/tab.component';
-import { TabLineComponent } from './tab-line/tab-line.component'
+import { TabLineComponent } from './tab-line/tab-line.component';
+import { RegisterComponent } from './register/register.component'
 @NgModule({
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { TabLineComponent } from './tab-line/tab-line.component'
     UploadComponent,
     LoginComponent,
     TabComponent,
-    TabLineComponent
+    TabLineComponent,
+    RegisterComponent
 
   ],
   bootstrap: [ AppComponent ]
