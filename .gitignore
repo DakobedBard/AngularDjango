@@ -9,7 +9,7 @@ tabGenerator/tabGenerator/__pycache__/
 *.mp3
 
 data/*
-
+node_modules/*
 app/mediafiles/*
 
 app/upload/migrations/*
