@@ -26,7 +26,10 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["src/js/jquery.js",
+              "src/js/raphael.js",
+              "src/js/jtab.js"
+            ]
           },
           "configurations": {
             "production": {

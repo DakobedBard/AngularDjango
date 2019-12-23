@@ -1,4 +1,14 @@
+<head>
+  ... (other stuff) ...
+  <!-- recommended to avoid security warnings with SVG in IE8 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+  <!-- optional: helpers to preset jtab region heights to avoid rendering jitter -->
+  <link type="text/css" rel="stylesheet" href="http://jtab.tardate.com/css/jtab-helper.css"/>
 
+  <!-- mandatory script includes for jtab -->
+  <script type="text/javascript" src="jtab.js"></script>
+
+</head>
 <mat-grid-list cols="2" rowHeight="2:1" gutterSize="3px">
   <mat-grid-tile >
     <mat-list>
@@ -29,11 +39,7 @@
     </mat-expansion-panel>
   </mat-grid-tile>
   <mat-grid-tile style="background-color: coral;">
-    <mat-tab-group>
-      <mat-tab label="Angular">Angular</mat-tab>
-      <mat-tab label="React">React</mat-tab>
-      <mat-tab label="Vue">Vue</mat-tab>
-    </mat-tab-group>
+    <div class="jtab"> E / / / | Am / B / || </div>
   </mat-grid-tile>
 
 </mat-grid-list>
