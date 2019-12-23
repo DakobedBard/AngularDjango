@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-
-const HEROES = [
-  {name: 'Dr IQ'},
-  {name: 'Magneta'},
-  {name: 'Bombasto'}
-];
+import { TabService } from  '../tab.service';
 
 @Component({
   selector: 'app-tab',
@@ -17,19 +11,12 @@ const HEROES = [
 
 })
 export class TabComponent implements OnInit {
-  tab_string =  "E / / / | Am / B / ||"; 
-  tab_string2 =  "B C G D | Am / B / ||"; 
 
-
-  heroes = HEROES;
-  parentMessage ="ParentMessagee";
-  constructor() { }
-  tab = [
-    {tab_string: 'E / / / | Am / B / ||'},
-    {tab_string: 'G / / / | Bm / C / ||'},
-    {tab_string: 'D / / / | Am / B / ||'}
-  ];
+  constructor(private tabService: TabService) { }
+  tab;
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.tab = this.tabService.getTab()
+  };
 
 }

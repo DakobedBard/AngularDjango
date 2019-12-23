@@ -1,0 +1,9 @@
+app-tab-line{
+    padding-top: 30px;
+    min-height: 200px;
+}
+ul{
+list-style-type: none;
+margin: 0;
+padding: 150;
+}

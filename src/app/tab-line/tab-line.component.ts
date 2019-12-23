@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Hero } from '../hero';
+
 @Component({
   selector: 'app-tab-line',
   templateUrl: './tab-line.component.html',
@@ -7,11 +7,11 @@ import { Hero } from '../hero';
 })
 export class TabLineComponent implements OnInit {
   message: String;
-  @Input() childMessage: string;
+  @Input() tab_string: string;
   constructor() { }
 
   ngOnInit() {
-    this.message = this.childMessage;
+    this.message = this.tab_string;
   }
 
 }

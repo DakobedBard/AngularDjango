@@ -3,11 +3,22 @@
   [line]="line"
  >
 </app-tab-line> -->
+<div  style="padding-top: 50px;">
 
-<app-tab-line [childMessage]="tab_string">
+</div>
+<mat-list>
+<mat-list-item  *ngFor="let line of tab" style="padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 4px;">
+  <app-tab-line [tab_string]= line.tab_string matLine>
+    </app-tab-line>
+  </mat-list-item>
+</mat-list>
+<app-tab-line [tab_string]="tab_string">
 </app-tab-line>
 `
 
-<app-tab-line [childMessage]="tab_string2">
+<app-tab-line [tab_string]="tab_string2">
 </app-tab-line>
-`
+` -->
