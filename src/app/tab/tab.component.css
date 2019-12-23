@@ -1,6 +1,7 @@
 app-tab-line{
     padding-top: 30px;
     min-height: 200px;
+    text-align: left;
 }
 ul{
 list-style-type: none;

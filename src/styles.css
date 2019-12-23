@@ -1,4 +1,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import  url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+body {
+    background: #456;
+    font-family: 'Open Sans', sans-serif;
+}
+
 
 /* Global Styles */
 h1 {
@@ -68,3 +74,4 @@ nav a.active {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

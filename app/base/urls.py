@@ -10,7 +10,6 @@ from uploadapp.views import FileUploadView
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-
     # Users API
     re_path(r'^api/auth/', include('accounts.api.urls'), name='api-auth'),
     path('api-token-auth/', views.obtain_auth_token, name='api-token-auth'),
