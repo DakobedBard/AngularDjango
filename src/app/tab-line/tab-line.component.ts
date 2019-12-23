@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Hero } from '../hero';
+
 @Component({
   selector: 'app-tab-line',
   templateUrl: './tab-line.component.html',
