@@ -38,6 +38,8 @@ class UserCreateAPIView(CreateAPIView):
         data = request.data
         serializer = UserCreateSerializer
         if serializer.validate("",data):
+            user = User(username = data['username'], email=data['email'], password =data['password'])
+            user.save()
             return Response(data, status=HTTP_200_OK)
         else:
             return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
