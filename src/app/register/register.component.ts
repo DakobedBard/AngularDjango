@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../register.service'
 import { FormGroup,ReactiveFormsModule, FormBuilder,FormArray, Validators, FormControl } from '@angular/forms';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,11 +22,15 @@ export class RegisterComponent implements OnInit {
   }
   get formControls() { return this.registerForm.controls; }
   register(){
-    console.log(this.registerForm.value);
+
     this.isSubmitted = true;
+    
     if(this.registerForm.invalid){
-      console.log(this.registerForm.get('email').value)
+      this.registerService.register(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.password);
       return;
+    }
+    else{
+      this.registerService.register(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.password);
     }
     
   }
