@@ -19,7 +19,8 @@ import { UploadComponent } from './upload/upload.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import { LoginComponent } from './login/login.component';
-import { TabComponent } from './tab/tab.component'
+import { TabComponent } from './tab/tab.component';
+import { TabLineComponent } from './tab-line/tab-line.component'
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import { TabComponent } from './tab/tab.component'
     DocumentSearchComponent,
     UploadComponent,
     LoginComponent,
-    TabComponent
+    TabComponent,
+    TabLineComponent
 
   ],
   bootstrap: [ AppComponent ]
