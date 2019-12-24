@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../register.service'
 import { FormGroup,ReactiveFormsModule, FormBuilder,FormArray, Validators, FormControl } from '@angular/forms';
-
+import {User} from '../user'
 
 @Component({
   selector: 'app-register',
@@ -11,6 +11,7 @@ import { FormGroup,ReactiveFormsModule, FormBuilder,FormArray, Validators, FormC
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   isSubmitted  =  false;
+  dataSaved = false;
   constructor(private registerService: RegisterService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -22,17 +23,21 @@ export class RegisterComponent implements OnInit {
   }
   get formControls() { return this.registerForm.controls; }
   register(){
-
-    this.isSubmitted = true;
-    
-    if(this.registerForm.invalid){
-      this.registerService.register(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.password);
-      return;
-    }
-    else{
-      this.registerService.register(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.password);
-    }
-    
+    this.dataSaved = false;
+    this.isSubmitted= true;
+    let user = this.registerForm.value
+    this.registerUser(user);
   }
+  
+  registerUser(user:User){
+    this.registerService.createUser(user).subscribe(
+      user => { console.log(user);this.dataSaved = true;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+  
 
 }
