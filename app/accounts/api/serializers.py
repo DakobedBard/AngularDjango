@@ -32,16 +32,19 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.ModelSerializer):
     token = serializers.CharField(allow_blank=True, read_only=True)
     email= serializers.EmailField(label="Email Address", required=False, allow_blank=True)
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model = User
         fields = [
             'email',
             'password',
-            'token'
+            'token',
+            'id'
         ]
         extra_kwargs = {"password":{"write_only":True}}
 
     def validate(self, data):
+
         email = data["email"]
         password = data["password"]
         user = User.objects.filter(email=email).first()
@@ -55,6 +58,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
         if user.password != password:
              raise serializers.ValidationError("Incorrect Credentials")
+        data['id'] = user.id
         return data
 
 
