@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class Service {
 
-  private documentsUrl = 'api/documents';  // URL to web api
+  private documentsUrl = 'http://localhost:8000/documents';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
