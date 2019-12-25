@@ -35,7 +35,9 @@ class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
     def post(self, request, *args, **kwargs):
+
         data = request.data
+        print("the data looks like! " + data['username'])
         serializer = UserCreateSerializer
         if serializer.validate("",data):
             user = User(username = data['username'], email=data['email'], password =data['password'])

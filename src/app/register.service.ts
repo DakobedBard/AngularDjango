@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
+const headers = new HttpHeaders({
+  'Content-Type': 'application/applicat/json'
+});
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  url = "http://localhost:8000/api/auth/register/"
+  apiURL: string = 'http://localhost:8000/api/auth';
   constructor(private  httpClient:HttpClient) { }
-
-  createUser(user: User): Observable<User> {
-    let httpHeaders = new HttpHeaders()
-        .set('Content-Type', 'application/json');   
-    let options = {
-        headers: httpHeaders
-    };        
-    return this.httpClient.post<User>(this.url, user, options);
-  }
+  public createUser(user: User){
+    return this.httpClient.post(`${this.apiURL}/register/`,user, {headers:headers});
+}
 }
