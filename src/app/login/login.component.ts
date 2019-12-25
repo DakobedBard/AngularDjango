@@ -19,6 +19,13 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
+  get formControls() { return this.loginForm.controls; }
+  register(){
+    this.dataSaved = false;
+    this.isSubmitted= true;
+    let user = this.loginForm.value
+    this.loginUser(user);
+  }
 
   login(){
     this.dataSaved = false;
