@@ -9,16 +9,23 @@ import { Document } from '../document';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  documents: Document[] = [];
+  documents: any = [];
 
   constructor(private documentService: Service) { }
 
   ngOnInit() {
     this.getDocuments();
-  }
+  };
 
   getDocuments(): void {
     this.documentService.getDocuments()
-      .subscribe(documents => this.documents = documents.slice(1, 5));
+      .subscribe((data => {
+        for (const d of (data as any)) {
+          this.documents.push({
+            name: d.name,
+            price: d.price
+          });
+        }
+    }))
   }
 }
