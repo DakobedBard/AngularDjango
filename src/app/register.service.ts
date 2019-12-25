@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 const headers = new HttpHeaders({
-  'Content-Type': 'application/applicat/json'
+  'Content-Type': 'application/json'
 });
 @Injectable({
   providedIn: 'root'

@@ -1,13 +1,12 @@
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
+from django.db.models import Q
 from upload.models import Document
 from .serializers import  DocumentSerializer, DocumentCreatetSerializer, DocumentListSerializer
 
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
     def get_queryset(self):
         qs = Document.objects.all()
         query = self.request.GET.get("q")
