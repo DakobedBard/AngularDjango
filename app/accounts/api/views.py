@@ -44,7 +44,6 @@ class UserCreateAPIView(CreateAPIView):
         else:
             return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-
 class UserLoginView(APIView):
     permission_classes = []
     serializer_class = UserLoginSerializer

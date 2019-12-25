@@ -13,8 +13,7 @@ urlpatterns = [
     # Users API
     re_path(r'^api/auth/', include('accounts.api.urls'), name='api-auth'),
     path('api-token-auth/', views.obtain_auth_token, name='api-token-auth'),
-
-
+    path('documents/', include('upload.api.urls'), name='documents' ),
     # Upload
     path('upload/', include('uploadapp.urls')),
 
