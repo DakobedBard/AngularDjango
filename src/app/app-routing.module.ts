@@ -7,8 +7,8 @@ import { UploadComponent } from './upload/upload.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 const routes: Routes = [                                  
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'dashboard/:id', component: DashboardComponent },
   { path: 'detail/:id', component: DocumentDetailComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'login', component: LoginComponent },

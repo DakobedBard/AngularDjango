@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     )
       .subscribe(
       response => { console.log("You have been logged in as " + user.email);this.dataSaved = true;
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard/1']);
       },
       err => {
         console.log(err);

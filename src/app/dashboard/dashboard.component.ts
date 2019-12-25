@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 import { Service } from '../document.service';
 import { Document } from '../document';
 
@@ -11,14 +11,18 @@ import { Document } from '../document';
 export class DashboardComponent implements OnInit {
   documents: any = [];
 
-  constructor(private documentService: Service) { }
+  constructor(
+    private route: ActivatedRoute,
+    private documentService: Service
+    ) { }
 
   ngOnInit() {
     this.getDocuments();
   };
 
   getDocuments(): void {
-    this.documentService.getDocuments()
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.documentService.getDocuments(id)
       .subscribe((data => {
         for (const d of (data as any)) {
           this.documents.push({
