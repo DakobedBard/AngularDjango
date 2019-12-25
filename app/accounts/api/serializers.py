@@ -44,25 +44,17 @@ class UserLoginSerializer(serializers.ModelSerializer):
     def validate(self, data):
         email = data["email"]
         password = data["password"]
-        print(email)
-        print("THe password is " + password )
         user = User.objects.filter(email=email).first()
         # If the user object is empty then it will trigger the exception.. not sure of a more elgeant solution this but
-        # I'm sure that it exists... 
+        # I'm sure that it exists...
         try:
             passw = user.password
         except Exception as e:
             raise serializers.ValidationError("User with that email address not found")
             return data
-        print(user.password)
 
-        print("The type of user is "  + str(user))
-        # print(password)
         if user.password != password:
              raise serializers.ValidationError("Incorrect Credentials")
-        # print("The email is " + user.email + " "+ str(len(user.email)))
-        # print("The email is " + email + " "+ str(len(email)))
-        # print("THe email of the user is" +str(user.password))
         return data
 
 

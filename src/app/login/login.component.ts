@@ -8,6 +8,7 @@ import {User} from '../user'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  result: Array<Object>;
   loginForm: FormGroup;
   isSubmitted  =  false;
   dataSaved = false;
@@ -20,12 +21,6 @@ export class LoginComponent implements OnInit {
     });
   }
   get formControls() { return this.loginForm.controls; }
-  register(){
-    this.dataSaved = false;
-    this.isSubmitted= true;
-    let user = this.loginForm.value
-    this.loginUser(user);
-  }
 
   login(){
     this.dataSaved = false;
@@ -35,8 +30,11 @@ export class LoginComponent implements OnInit {
   }
   
   loginUser(user:User){
-    this.loginService.loginUser(user).subscribe(
-      user => { console.log(user);this.dataSaved = true;
+    this.loginService.loginUser(user).pipe(
+      
+    )
+      .subscribe(
+      response => { console.log("You have been logged in as " + user.email);this.dataSaved = true;
       },
       err => {
         console.log(err);
