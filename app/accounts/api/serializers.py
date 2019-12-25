@@ -44,10 +44,11 @@ class UserLoginSerializer(serializers.ModelSerializer):
     def validate(self, data):
         email = data["email"]
         password = data["password"]
-        user = User.objects.filter(email=email).first()
-        print("THe email of the user is" +str(user.password))
-        if user.password != password:
-            raise serializers.ValidationError("Incorrect Credentials")
+        print("THe password is " + password )
+        # user = User.objects.filter(email=email).first()
+        # print("THe email of the user is" +str(user.password))
+        # if user.password != password:
+        #     raise serializers.ValidationError("Incorrect Credentials")
         return data
 
 

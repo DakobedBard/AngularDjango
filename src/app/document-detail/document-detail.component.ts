@@ -32,9 +32,4 @@ export class DocumentDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
- save(): void {
-    this.documentService.updateDocument(this.document)
-      .subscribe(() => this.goBack());
-  }
 }

@@ -10,11 +10,13 @@ class DocumentCreatetSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'uploaded_at',
+            'name',
             's3Path',
             'bucket',
             'extension',
             'user',
-            'type'
+            'type',
+
         ]
     pass
 class DocumentListSerializer(serializers.ModelSerializer):
@@ -26,6 +28,7 @@ class DocumentSerializer(serializers.ModelSerializer):
         model = Document
         fields = [
             'id',
+            'name',
             'uploaded_at',
             's3Path',
             'bucket',

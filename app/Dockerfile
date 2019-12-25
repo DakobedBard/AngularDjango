@@ -28,6 +28,7 @@ run pip install djangorestframework-jwt
 run pip install --upgrade awscli
 run pip install -U requests
 run pip install pytest
+run pip install django-cors-headers
 
 run pip install djangorestframework
 COPY ./runtests.py /usr/src/app/runtests.py
