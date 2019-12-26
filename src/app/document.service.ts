@@ -23,8 +23,8 @@ export class Service {
 
   /** GET documents from the server */
 
-  getDocuments() {
-    return this.http.get(this.documentsUrl);
+  getDocuments(id: any) {
+    return this.http.get(this.documentsUrl+'?id=1');
   }
 
 
@@ -38,7 +38,7 @@ export class Service {
 
   /** GET document by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Document> {
-    const url = `${this.documentsUrl}/?id=${id}`;
+    const url = `${this.documentsUrl}?id=${id}`;
     return this.http.get<Document[]>(url)
       .pipe(
         map(documents => documents[0]), // returns a {0|1} element array

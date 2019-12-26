@@ -10,12 +10,27 @@ class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     def get_queryset(self):
         qs = Document.objects.all()
         query = self.request.GET.get("q")
+        userID = self.request.query_params.get('id', None)
+
         if query is not None:
             qs = qs.filter(Q(title__icontains=query))
         return qs
     def post(self,request,*args, **kwargs):
         return self.create(request, *args, **kwargs)
-
+class DocumentAPIView(mixins.CreateModelMixin,generics.ListAPIView):
+    serializer_class = DocumentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        qs = Document.objects.all()
+        userID = self.kwargs['id']
+        id_ = userID.split('=')[-1]
+        print("The ID is "  + id_)
+        print("I'm a dumbass " + str(len(qs)))
+        if len(qs) > 0:
+            print("Hello")
+            return qs
+        else:
+            print("what")
 
 class DocumentDetailAPIView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
