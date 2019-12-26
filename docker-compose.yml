@@ -14,8 +14,6 @@ services:
       - ./.env.dev-sample
     depends_on:
       - db
-      - rabbitmq
-      - celery_worker
 
   db:
     image: postgres:12.0-alpine
@@ -26,16 +24,16 @@ services:
       - POSTGRES_PASSWORD=database1_password
       - POSTGRES_DB=database1
 
-  rabbitmq:
-    image: rabbitmq:3.7-alpine
-  celery_worker:
-    <<: *python
-    container_name: celery
-    command: celery -A accounts worker --loglevel=info
-    ports: []
-    depends_on:
-      - rabbitmq
-      - db
+#  rabbitmq:
+#    image: rabbitmq:3.7-alpine
+#  celery_worker:
+#    <<: *python
+#    container_name: celery
+#    command: celery -A accounts worker --loglevel=info
+#    ports: []
+#    depends_on:
+#      - rabbitmq
+#      - db
 
 volumes:
   postgres_data:
