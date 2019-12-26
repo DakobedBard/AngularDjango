@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
         for (const d of (data as any)) {
           this.documents.push({
             name: d.name,
-            price: d.price
+
           });
         }
     }))
