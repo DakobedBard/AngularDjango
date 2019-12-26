@@ -4,9 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
 
-
-
-from uploadapp.views import FileUploadView
 urlpatterns = [
     path("admin/", admin.site.urls),
 
@@ -15,7 +12,6 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token, name='api-token-auth'),
     path('documents/', include('upload.api.urls'), name='documents' ),
     # Upload
-    path('upload/', include('uploadapp.urls')),
 
 ]
 

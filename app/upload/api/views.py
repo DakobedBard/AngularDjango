@@ -3,7 +3,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.db.models import Q
 from upload.models import Document
 from .serializers import  DocumentSerializer, DocumentCreatetSerializer, DocumentListSerializer
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -21,11 +22,13 @@ class DocumentAPIView(mixins.CreateModelMixin,generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
-        qs = Document.objects.all()
         userID = self.kwargs['id']
         id_ = userID.split('=')[-1]
+        users = User.objects.all().filter(id=id_)
+        qs = Document.objects.all().filter(user=id_)
+
         print("The ID is "  + id_)
-        print("I'm a dumbass " + str(len(qs)))
+        print("There are  " + str(len(users)) + " users")
         if len(qs) > 0:
             print("Hello")
             return qs
