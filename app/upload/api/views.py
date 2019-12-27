@@ -57,12 +57,11 @@ class DocumentCreateAPIView(generics.CreateAPIView):
         print("I get here in the server")
 
         if serializer.is_valid():
-
             serializer.save()
             uploadFile = serializer.data.get('uploadfile')
             print("the type of uploadFile is " + uploadFile)
             self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
             return Response(serializer.data, status=200)
         else:
-            print(serializer.errors)
+            serializer.is_valid()
             return Response(serializer.errors, status=400)
