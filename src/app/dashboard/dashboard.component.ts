@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+UIimport { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Service } from '../document.service';
 import { Document } from '../document';

@@ -4,12 +4,13 @@ from django.contrib.auth import get_user_model
 
 from django.contrib.auth.models import User
 
-class DocumentCreatetSerializer(serializers.ModelSerializer):
+class DocumentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = [
             'id',
             'uploaded_at',
+            'uploadfile',
             'name',
             's3Path',
             'bucket',

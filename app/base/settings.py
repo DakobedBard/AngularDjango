@@ -11,6 +11,27 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from boto3 import Session
+
+session = Session()
+
+credentials = session.get_credentials()
+current_credentials = credentials.get_frozen_credentials()
+print(current_credentials.access_key)
+print(current_credentials.secret_key)
+print(current_credentials.token)
+
+AWS_ACCESS_KEY_ID = 'current_credentials.access_key)'
+AWS_SECRET_ACCESS_KEY = 'current_credentials.secret_key'
+AWS_STORAGE_BUCKET_NAME = 'basedjango'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+AWS_LOCATION = 'staticFiles'
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +64,7 @@ INSTALLED_APPS = [
     "accounts",
     "upload",
     'corsheaders',
+    "storages"
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -140,11 +162,16 @@ CELERY_BROKER_URL ="amqp://rabbitmq"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = "/staticfiles/"
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
+    os.path.join(BASE_DIR, "app/staticfiles"),
 ]
-STATIC_ROOT="/staticfiles/"
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+STATIC_ROOT=os.path.join(BASE_DIR, "/staticfiles/")
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
@@ -155,26 +182,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     )
 }
-
-
-
-'''
-curl -X POST -d "username=mollytuttle&password=1!Iksarmanssss" http//localhost:8000/api-auth-token
-'''
-
-
-
-
-
-
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('heyward-django-files')
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3BotoStorge'

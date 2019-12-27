@@ -1,10 +1,13 @@
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import  action
 from django.db.models import Q
 from upload.models import Document
-from .serializers import  DocumentSerializer, DocumentCreatetSerializer, DocumentListSerializer
+from .serializers import  DocumentSerializer, DocumentCreateSerializer, DocumentListSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.response import Response
 User = get_user_model()
+from aws.s3Client import s3Client
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -42,5 +45,19 @@ class DocumentDetailAPIView(generics.RetrieveAPIView):
 
 class DocumentCreateAPIView(generics.CreateAPIView):
     queryset = Document.objects.all()
-    serializer_class = DocumentCreatetSerializer
+    serializer_class = DocumentCreateSerializer
     lookup_field = 'pk'
+    def __init__(self):
+        user = User.objects.all().filter(username='billystrings')
+        self.s3Client = s3Client('basedjango')
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        uploadfile = data['uploadfile']
+        print("The name is " + uploadfile.name)
+        self.s3Client.upload_file(uploadfile,'upload_object.jpg')
+        serializer = DocumentCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=400)
