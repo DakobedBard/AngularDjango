@@ -19,7 +19,9 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
             'type',
 
         ]
-    pass
+    def is_valid(self):
+        print("in valid")
+
 class DocumentListSerializer(serializers.ModelSerializer):
   pass
 

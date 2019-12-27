@@ -54,6 +54,7 @@ class DocumentCreateAPIView(generics.CreateAPIView):
         data = request.data
 
         serializer = DocumentCreateSerializer(data=request.data)
+        print("I get here in the server")
 
         if serializer.is_valid():
 
@@ -63,4 +64,5 @@ class DocumentCreateAPIView(generics.CreateAPIView):
             self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
             return Response(serializer.data, status=200)
         else:
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
