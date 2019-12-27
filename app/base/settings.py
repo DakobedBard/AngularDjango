@@ -61,12 +61,14 @@ INSTALLED_APPS = [
     "crispy_forms",
     "rest_framework",
     "rest_framework.authtoken",
+    'rest_auth',
     "accounts",
     "upload",
     'corsheaders',
-    "storages"
-]
+    "storages",
 
+]
+SITE_ID=1
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -176,9 +178,10 @@ MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICTION_CLASSES":
-        ('rest_framework.authentication.TokenAuthentication'),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     "DEFAULT_PERMISSION_CLASSES":(
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
