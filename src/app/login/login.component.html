@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <mat-card-content>
     <div class="login">
-      <h2 class="login-header">Register</h2>
+      <h2 class="login-header">Login</h2>
       <form [formGroup]="loginForm" class="login-container" (ngSubmit)="login()">
   
         <p [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
@@ -25,7 +25,7 @@
     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="login()" color="primary">Register</button>
+    <button mat-raised-button (click)="login()" color="primary">Login</button>
   </mat-card-actions>
 </mat-card>
 

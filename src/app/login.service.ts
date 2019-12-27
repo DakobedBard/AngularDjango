@@ -12,7 +12,7 @@ const httpOptions:any = {
   providedIn: 'root'
 })
 export class LoginService {
-  apiURL: string = 'http://localhost:8000/api/auth';
+  apiURL: string = 'http://localhost:8000/api/token';
   constructor(private  httpClient:HttpClient) { }
   public loginUser(user){
     return this.httpClient.post(`${this.apiURL}/login/`,user, httpOptions);
