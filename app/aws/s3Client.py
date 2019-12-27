@@ -28,7 +28,7 @@ class s3Client:
         # Upload the file
         s3_client = boto3.client('s3')
         try:
-            with open("/usr/src/app/mediafiles/mediafiles/2019/12/27/monet.jpg", "rb") as f:
+            with open("/usr/src/app" + file_name, "rb") as f:
                 print("I open the file " + str(file_name))
                 s3_client.upload_fileobj(f, self.bucket, object_name)
                 document = Document(s3Path=file_name,user=User.objects.get(id=1),bucket=self.bucket)

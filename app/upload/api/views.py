@@ -52,12 +52,15 @@ class DocumentCreateAPIView(generics.CreateAPIView):
         self.s3Client = s3Client('basedjango')
     def post(self, request, *args, **kwargs):
         data = request.data
-        uploadfile = data['uploadfile']
-        print("The name is " + uploadfile.name)
-        self.s3Client.upload_file(uploadfile,'upload_object.jpg')
+
         serializer = DocumentCreateSerializer(data=request.data)
+
         if serializer.is_valid():
+
             serializer.save()
+            uploadFile = serializer.data.get('uploadfile')
+            print("the type of uploadFile is " + uploadFile)
+            self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
             return Response(serializer.data, status=200)
         else:
             return Response(serializer.errors, status=400)
