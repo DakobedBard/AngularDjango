@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted  =  false;
   dataSaved = false;
+  loginResponse;
   constructor(private loginService: LoginService, private formBuilder: FormBuilder,private router: Router ) { }
 
   ngOnInit() {
@@ -28,20 +29,19 @@ export class LoginComponent implements OnInit {
     this.isSubmitted= true;
     let user = this.loginForm.value
     this.loginUser(user);
+    
   }
   
   loginUser(user:User){
-    this.loginService.loginUser(user).pipe(
+    this.loginResponse = this.loginService.loginUser(user).pipe(
       
     )
       .subscribe(
-      response => { console.log("You have been logged in as " + user.username);this.dataSaved = true;
-      this.router.navigate(['/dashboard/1']);
-      },
-      err => {
-        console.log(err);
+        data => {console.log("Thge data is " + data)},
+        error => {console.log(error);
       }
     )
+    console.log("The login repsonse is " + this.loginResponse)
   }
 
 }
