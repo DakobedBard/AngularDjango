@@ -40,6 +40,7 @@ class HelloView(APIView):
 
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     def post(self, request, *args, **kwargs):
         data = request.data

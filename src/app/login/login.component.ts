@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm  =  this.formBuilder.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       
     )
       .subscribe(
-      response => { console.log("You have been logged in as " + user.email);this.dataSaved = true;
+      response => { console.log("You have been logged in as " + user.username);this.dataSaved = true;
       this.router.navigate(['/dashboard/1']);
       },
       err => {
