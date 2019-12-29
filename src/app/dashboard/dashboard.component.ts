@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
   onSubmit(){
     const formData = new FormData();
     formData.append('filename', this.fileData);
-    formData.append('user', "3");
+    formData.append('user',  JSON.stringify(1));
     formData.append("name","firstupload");
 
     this.documentService.createDocument(formData).subscribe(

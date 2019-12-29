@@ -15,6 +15,7 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
             'user',
         ]
     def validate(self,data):
+        print("I am here in the validator")
         return data
 
 class DocumentListSerializer(serializers.ModelSerializer):

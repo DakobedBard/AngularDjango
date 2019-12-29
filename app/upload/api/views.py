@@ -29,45 +29,44 @@ class DocumentAPIView(mixins.CreateModelMixin,generics.ListAPIView):
         id_ = userID.split('=')[-1]
         users = User.objects.all().filter(id=id_)
         qs = Document.objects.all().filter(user=id_)
-
-        print("The ID is "  + id_)
-        print("There are  " + str(len(users)) + " users")
         if len(qs) > 0:
-            print("Hello")
+
             return qs
         else:
-            print("what")
+            return {}
 
 class DocumentDetailAPIView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     lookup_field = 'pk'
 from rest_framework.parsers import FormParser, MultiPartParser,FileUploadParser
-class DocumentCreateAPIView(generics.CreateAPIView):
+from rest_framework.views import APIView
+class DocumentCreateAPIView(APIView):
     queryset = Document.objects.all()
     serializer_class = DocumentCreateSerializer
-    parser_classes = (FormParser, MultiPartParser)
-    lookup_field = 'pk'
+    permission_classes = []
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
     def __init__(self):
         user = User.objects.all().filter(username='billystrings')
         self.s3Client = s3Client('basedjango')
         print("I get here in the server1")
 
-    def put(self, request, *args, **kwargs):
-        file_obj = request.POST.get('filename',False)
-        print(file_obj)
-
+    def post(self, request, *args, **kwargs):
+        user = request.data.get('user')
+        print(user)
+        print(" dfd " + str(request.data))
         # data = request.data
-
         serializer = DocumentCreateSerializer(data=request.data)
         print("I get here in the server")
-
         if serializer.is_valid():
             serializer.save()
-        #     uploadFile = serializer.data.get('filename')
-        #     print("the type of uploadFile is " + uploadFile)
-        #     # self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
-        #     return Response(serializer.data, status=200)
-        # else:
-        #     serializer.is_valid()
-        return Response(serializer.errors, status=400)
+            #     uploadFile = serializer.data.get('filename')
+            #     print("the type of uploadFile is " + uploadFile)
+            #     # self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
+            print("I get here2 in the server")
+            return Response(serializer.data, status=201)
+        else:
+            print("serializer data " + str(serializer.data))
+            print("I get here3 in the server")
+            print(serializer.errors)
+            return Response(serializer.errors, status=400)
