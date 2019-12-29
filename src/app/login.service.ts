@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { User } from './user'
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router'
 import {LoginResponse} from './login-response';
 import {Observable} from'rxjs';
+
 const httpOptions:any = { 
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   }),
-  observe:'response'
+  observe:'response',
 }; 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,16 @@ export class LoginService {
   constructor(private  httpClient:HttpClient, private router:Router) { }
 
   public loginUser(user):Observable<LoginResponse>{
-    return this.httpClient.post<LoginResponse>(`${this.apiURL}/`,user,<Object> httpOptions);
+    return this.httpClient.post<LoginResponse>(`${this.apiURL}/`,user,<Object> httpOptions).pipe(
+      tap(data => {
+        this.storeTokens(data)
+      }  
+    ));
+  }
+  private storeTokens(tokens){
+    let obj = JSON.parse(JSON.stringify(tokens));
+    localStorage.setItem('access',obj.body.access)
+    localStorage.setItem('refresh',obj.body.refresh)
   }
 
   logoutUser() {
