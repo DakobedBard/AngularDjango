@@ -3,9 +3,10 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework.decorators import  action
 from django.db.models import Q
 from upload.models import Document
-from .serializers import  DocumentSerializer, DocumentCreateSerializer, DocumentListSerializer
+from .serializers import  DocumentSerializer, DocumentCreateSerializer, FileSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
+from rest_framework import status
 User = get_user_model()
 from aws.s3Client import s3Client
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
@@ -29,39 +30,60 @@ class DocumentAPIView(mixins.CreateModelMixin,generics.ListAPIView):
         id_ = userID.split('=')[-1]
         users = User.objects.all().filter(id=id_)
         qs = Document.objects.all().filter(user=id_)
-
-        print("The ID is "  + id_)
-        print("There are  " + str(len(users)) + " users")
         if len(qs) > 0:
-            print("Hello")
+
             return qs
         else:
-            print("what")
+            return {}
 
 class DocumentDetailAPIView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     lookup_field = 'pk'
-
-class DocumentCreateAPIView(generics.CreateAPIView):
+from rest_framework.parsers import FormParser, MultiPartParser,FileUploadParser
+from rest_framework.views import APIView
+class DocumentCreateAPIView(APIView):
     queryset = Document.objects.all()
     serializer_class = DocumentCreateSerializer
-    lookup_field = 'pk'
+    permission_classes = []
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
     def __init__(self):
         user = User.objects.all().filter(username='billystrings')
         self.s3Client = s3Client('basedjango')
-    def post(self, request, *args, **kwargs):
-        data = request.data
+        print("I get here in the server1")
 
+    def post(self, request, *args, **kwargs):
+        user = request.data.get('user')
+        print(user)
+        print(" dfd " + str(request.data))
+        # data = request.data
         serializer = DocumentCreateSerializer(data=request.data)
         print("I get here in the server")
-
         if serializer.is_valid():
             serializer.save()
-            uploadFile = serializer.data.get('uploadfile')
-            print("the type of uploadFile is " + uploadFile)
-            self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
-            return Response(serializer.data, status=200)
+            #     uploadFile = serializer.data.get('filename')
+            #     print("the type of uploadFile is " + uploadFile)
+            #     # self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
+            print("I get here2 in the server")
+            return Response(serializer.data, status=201)
         else:
-            serializer.is_valid()
+            print("serializer data " + str(serializer.data))
+            print("I get here3 in the server")
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
+
+class FileUploadView(APIView):
+    parser_class = (FileUploadParser,)
+
+    def post(self, request, *args, **kwargs):
+        if request is None:
+            print("why")
+        # print("request: " + request)
+        file_serializer = FileSerializer(data=request.data)
+
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print("wtf")
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

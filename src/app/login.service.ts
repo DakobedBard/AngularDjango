@@ -23,9 +23,10 @@ export class LoginService {
   public loginUser(user):Observable<LoginResponse>{
     return this.httpClient.post<LoginResponse>(`${this.apiURL}/`,user,<Object> httpOptions).pipe(
       tap(data => {
-        this.storeTokens(data)
+        this.storeTokens(data);
       }  
     ));
+
   }
   private storeTokens(tokens){
     let obj = JSON.parse(JSON.stringify(tokens));
@@ -40,6 +41,8 @@ export class LoginService {
         localStorage.setItem('currentUserID',JSON.stringify(obj.userid));  
       })
     )
+
+
   }
 
   logoutUser() {

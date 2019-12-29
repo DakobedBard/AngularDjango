@@ -21,8 +21,16 @@
   
 
     </mat-list>
-  <input type="file" name="uploadfile" (change)="onChange($event)" />
-    <button type="submit" (click)="onSubmit()">Upload File</button>
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <input type="file" name="profile" (change)="onChange($event)" />
+    <button type="submit">Upload Image File</button>
+
+
+</form>
+
   </mat-grid-tile >
   <mat-grid-tile rowspan="2" style="background-color: coral;">
     <app-tab></app-tab>

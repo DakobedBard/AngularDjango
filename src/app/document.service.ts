@@ -11,11 +11,13 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class Service {
 
-  private documentsUrl = 'http://localhost:8000/documents/list/1';  // URL to web api
+  private documentsUrl = 'http://localhost:8000/documents';
   documents: any = [];
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  httpOptions:any = { 
+    headers: new HttpHeaders({
+      'Content-Type': 'multipart/form-data'
+    }),
+  }; 
 
   constructor(
     private http: HttpClient,
@@ -24,10 +26,13 @@ export class Service {
   /** GET documents from the server */
 
   getDocuments(id: any) {
-    return this.http.get(this.documentsUrl);
+    console.log("id " + id)
+    return this.http.get(this.documentsUrl+'/list/'+id);
     // return this.http.get(this.documentsUrl+'?id=1');
   }
-
+  createDocument(document) {
+    return this.http.post(this.documentsUrl+'/upload/',document,this.httpOptions);
+  }
 
   /** GET document by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Document> {
@@ -63,27 +68,6 @@ export class Service {
       catchError(this.handleError<Document[]>('searchDocument', []))
     );
   }
-
-  //////// Save methods //////////
-  /** POST: add a new document to the server */
-  addDocument (document: Document): Observable<Document> {
-    return this.http.post<Document>(this.documentsUrl, document, this.httpOptions).pipe(
-      tap((newDocument: Document) => this.log(`added document w/ id=${newDocument.id}`)),
-      catchError(this.handleError<Document>('addDocument'))
-    );
-  }
-
-  /** DELETE: delete the document from the server */
-  deleteDocument (document: Document | number): Observable<Document> {
-    const id = typeof document === 'number' ? document : document.id;
-    const url = `${this.documentsUrl}/${id}`;
-
-    return this.http.delete<Document>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted document id=${id}`)),
-      catchError(this.handleError<Document>('deleteDocument'))
-    );
-  }
-
 
   /**
    * Handle Http operation that failed.

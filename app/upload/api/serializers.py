@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from upload.models import Document
+from upload.models import Document, File
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.models import User
@@ -10,16 +10,12 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'uploaded_at',
-            'uploadfile',
+            'filename',
             'name',
-            's3Path',
-            'bucket',
-            'extension',
             'user',
-            'type',
-
         ]
     def validate(self,data):
+        print("I am here in the validator")
         return data
 
 class DocumentListSerializer(serializers.ModelSerializer):
@@ -33,11 +29,12 @@ class DocumentSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'uploaded_at',
-            's3Path',
-            'bucket',
-            'extension',
             'user'
         ]
 
     def get_url(self, obj):
         return obj.get_api_url()
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = "__all__"
