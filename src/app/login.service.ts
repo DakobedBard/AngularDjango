@@ -16,7 +16,6 @@ const httpOptions:any = {
   providedIn: 'root'
 })
 export class LoginService {
-  jsondata;
   apiURL: string = 'http://localhost:8000/api/token';
   constructor(private  httpClient:HttpClient, private router:Router) { }
 
@@ -28,12 +27,9 @@ export class LoginService {
     ));
   }
   private storeTokens(tokens){
-    console.log(JSON.stringify(tokens));
-    this.jsondata = JSON.stringify(tokens);
-    console.log("length " +this.jsondata.length); 
-    let obj = JSON.parse(this.jsondata);
-    console.log("body " + JSON.stringify(obj.body.access)); 
-
+    let obj = JSON.parse(JSON.stringify(tokens));
+    localStorage.setItem('access',obj.body.access)
+    localStorage.setItem('refresh',obj.body.refresh)
   }
 
   logoutUser() {
