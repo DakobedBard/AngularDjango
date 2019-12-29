@@ -35,17 +35,7 @@ export class LoginComponent implements OnInit {
   }
   
   loginUser(user:User){
-    this.loginResponse = this.loginService.loginUser(user).pipe(
-      tap(data => {
-        console.log(JSON.stringify(data));
-        this.jsondata = JSON.stringify(data);
-        console.log("length " +this.jsondata.length); 
-        let obj = JSON.parse(this.jsondata);
-        console.log("body " + JSON.stringify(obj.body.access)); 
-      }
-        
-       )
-    )
+    this.loginResponse = this.loginService.loginUser(user)
       .subscribe(
         data => {},
         error => {console.log(error);
