@@ -22,12 +22,14 @@ export class DashboardComponent implements OnInit {
   filename
   response;
   imageURL;
+  private fileData = null;
   constructor(
     private route: ActivatedRoute,
     private documentService: Service,
     private formBuilder: FormBuilder,
     private dashboardService: DashboardService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+
     ) { }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class DashboardComponent implements OnInit {
     });
   };
   onChange(event) {
-
+    this.fileData = <File>event.target.files[0];
     console.log("ererer")
     if (event.target.files.length > 0) {
       console.log("ererer")
@@ -62,15 +64,9 @@ export class DashboardComponent implements OnInit {
   }
   onSubmit(){
     const formData = new FormData();
-    formData.append('uploadfile', this.form.get('uploadfile').value);
-    formData.append('bucket', 'basedjango');
+    formData.append('uploadfile', this.fileData);
     formData.append('user', "3");
-    formData.append("type","image");
     formData.append("name","firstupload");
-    formData.append("extension","jpeg");
-    formData.append("s3Path", "none")
-    let doc = new Document()
-    doc.name="first"
 
     this.documentService.createDocument(formData).subscribe(
       (res) => {

@@ -42,7 +42,7 @@ class DocumentDetailAPIView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     lookup_field = 'pk'
-
+from rest_framework.parsers import FormParser, MultiPartParser
 class DocumentCreateAPIView(generics.CreateAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentCreateSerializer
@@ -52,7 +52,7 @@ class DocumentCreateAPIView(generics.CreateAPIView):
         self.s3Client = s3Client('basedjango')
     def post(self, request, *args, **kwargs):
         data = request.data
-
+        parser_classes = (FormParser, MultiPartParser)
         serializer = DocumentCreateSerializer(data=request.data)
         print("I get here in the server")
 
