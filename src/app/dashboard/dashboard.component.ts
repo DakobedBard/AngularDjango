@@ -48,7 +48,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getDocuments(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = localStorage.getItem('currentUserID')
+    console.log("I got documents " + id);
     this.documentService.getDocuments(id)
       .subscribe((data => {
         for (const d of (data as any)) {

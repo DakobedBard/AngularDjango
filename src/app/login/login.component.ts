@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.loginUser(user);
     
     this.getUserID(user);
+
   }
   getUserID(user:User){
     this.loginService.userID(user)
@@ -45,7 +46,9 @@ export class LoginComponent implements OnInit {
   loginUser(user:User){
     this.loginResponse = this.loginService.loginUser(user)
       .subscribe(
-        data => {},
+        data => {
+          let id = localStorage.getItem('currentUserID');
+        },
         error => {console.log(error);
       }
     )
