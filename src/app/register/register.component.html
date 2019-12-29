@@ -22,13 +22,24 @@
         </div>
     
     
-        <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
-          <input type="password" placeholder="Password" formControlName="password">
+        <p [ngClass]="{ 'has-error': isSubmitted && formControls.password1.errors }">
+          <input type="password1" placeholder="Password1" formControlName="password1">
         </p>
     
-        <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
-          <div *ngIf="formControls.password.errors.required">Password is required</div>
+        <div *ngIf="isSubmitted && formControls.password1.errors" class="help-block">
+          <div *ngIf="formControls.password1.errors.required">Password1 is required</div>
         </div>
+
+
+        <p [ngClass]="{ 'has-error': isSubmitted && formControls.password2.errors }">
+          <input type="password2" placeholder="Password2" formControlName="password2">
+        </p>
+    
+        <div *ngIf="isSubmitted && formControls.password2.errors" class="help-block">
+          <div *ngIf="formControls.password2.errors.required">Password2 is required</div>
+        </div>
+    
+
     
       </form>
     </div>

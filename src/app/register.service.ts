@@ -10,9 +10,9 @@ const headers = new HttpHeaders({
   providedIn: 'root'
 })
 export class RegisterService {
-  apiURL: string = 'http://localhost:8000/api/auth';
+  apiURL: string = 'http://localhost:8000/rest-auth';
   constructor(private  httpClient:HttpClient) { }
   public createUser(user: User){
-    return this.httpClient.post(`${this.apiURL}/register/`,user, {headers:headers});
+    return this.httpClient.post(`${this.apiURL}/registration/`,user, {headers:headers});
 }
 }
