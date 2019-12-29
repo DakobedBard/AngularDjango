@@ -32,8 +32,16 @@ export class LoginComponent implements OnInit {
     let user = this.loginForm.value
     this.loginUser(user);
     
+    this.getUserID(user);
   }
-  
+  getUserID(user:User){
+    this.loginService.userID(user)
+      .subscribe(data => {
+        let resp= JSON.parse(JSON.stringify(data)); 
+
+      })
+  }
+
   loginUser(user:User){
     this.loginResponse = this.loginService.loginUser(user)
       .subscribe(
