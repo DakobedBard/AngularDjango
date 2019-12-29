@@ -42,26 +42,32 @@ class DocumentDetailAPIView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     lookup_field = 'pk'
-from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.parsers import FormParser, MultiPartParser,FileUploadParser
 class DocumentCreateAPIView(generics.CreateAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentCreateSerializer
+    parser_classes = (FormParser, MultiPartParser)
     lookup_field = 'pk'
     def __init__(self):
         user = User.objects.all().filter(username='billystrings')
         self.s3Client = s3Client('basedjango')
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        parser_classes = (FormParser, MultiPartParser)
+        print("I get here in the server1")
+
+    def put(self, request, *args, **kwargs):
+        file_obj = request.POST.get('filename',False)
+        print(file_obj)
+
+        # data = request.data
+
         serializer = DocumentCreateSerializer(data=request.data)
         print("I get here in the server")
 
         if serializer.is_valid():
             serializer.save()
-            uploadFile = serializer.data.get('uploadfile')
-            print("the type of uploadFile is " + uploadFile)
-            self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
-            return Response(serializer.data, status=200)
-        else:
-            serializer.is_valid()
-            return Response(serializer.errors, status=400)
+        #     uploadFile = serializer.data.get('filename')
+        #     print("the type of uploadFile is " + uploadFile)
+        #     # self.s3Client.upload_file(uploadFile,uploadFile.split('/')[-1])
+        #     return Response(serializer.data, status=200)
+        # else:
+        #     serializer.is_valid()
+        return Response(serializer.errors, status=400)

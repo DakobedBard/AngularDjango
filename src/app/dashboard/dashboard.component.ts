@@ -5,12 +5,7 @@ import { Document } from '../document';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DashboardService } from '../dashboard.service';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-const httpOptions:any = { 
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  }),
-  observe:'response'
-}; 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -64,7 +59,7 @@ export class DashboardComponent implements OnInit {
   }
   onSubmit(){
     const formData = new FormData();
-    formData.append('uploadfile', this.fileData);
+    formData.append('filename', this.fileData);
     formData.append('user', "3");
     formData.append("name","firstupload");
 

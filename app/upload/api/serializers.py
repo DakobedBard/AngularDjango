@@ -10,7 +10,7 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'uploaded_at',
-            'uploadfile',
+            'filename',
             'name',
             'user',
         ]

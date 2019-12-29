@@ -15,7 +15,7 @@ export class Service {
   documents: any = [];
   httpOptions:any = { 
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     }),
     observe:'response'
   }; 
@@ -33,7 +33,7 @@ export class Service {
   }
   createDocument(document) {
 
-    return this.http.post(this.documentsUrl+'/create/',document,this.httpOptions);
+    return this.http.put(this.documentsUrl+'/create/',document,this.httpOptions);
     // return this.http.get(this.documentsUrl+'?id=1');
   }
 
