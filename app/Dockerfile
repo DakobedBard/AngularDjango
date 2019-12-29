@@ -25,6 +25,7 @@ run pip install --upgrade youtube-dl
 run pip install --upgrade ipython
 run pip install -U Celery
 run pip install djangorestframework-jwt
+run pip install djangorestframework_simplejwt
 run pip install django-rest-auth
 run pip install django-rest-auth[with_social]
 run pip install --upgrade awscli
