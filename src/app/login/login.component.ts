@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.loginUser(user);
     
     this.getUserID(user);
-
+    this.router.navigate(['/dashboard/1'])
   }
   getUserID(user:User){
     this.loginService.userID(user)
