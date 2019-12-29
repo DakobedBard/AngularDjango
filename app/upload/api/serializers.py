@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from upload.models import Document
+from upload.models import Document, File
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.models import User
@@ -34,3 +34,7 @@ class DocumentSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return obj.get_api_url()
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = "__all__"

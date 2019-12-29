@@ -30,17 +30,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getDocuments();
     this.form = this.formBuilder.group({
-      uploadfile: ['']
+      file: ['']
     });
   };
   onChange(event) {
     this.fileData = <File>event.target.files[0];
-    console.log("ererer")
     if (event.target.files.length > 0) {
-      console.log("ererer")
       const file = event.target.files[0];
       this.filename = file.name
-      this.form.get('uploadfile').setValue(file);
+      this.form.get('upload').setValue(file);
     }
   }
 
@@ -59,10 +57,7 @@ export class DashboardComponent implements OnInit {
   }
   onSubmit(){
     const formData = new FormData();
-    formData.append('filename', this.fileData);
-    formData.append('user',  JSON.stringify(1));
-    formData.append("name","firstupload");
-
+    formData.append('file', this.form.get('upload').value);
     this.documentService.createDocument(formData).subscribe(
       (res) => {
 

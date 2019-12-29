@@ -17,7 +17,6 @@ export class Service {
     headers: new HttpHeaders({
       'Content-Type': 'multipart/form-data'
     }),
-    observe:'response'
   }; 
 
   constructor(
@@ -32,9 +31,7 @@ export class Service {
     // return this.http.get(this.documentsUrl+'?id=1');
   }
   createDocument(document) {
-
-    return this.http.post(this.documentsUrl+'/create/',document,this.httpOptions);
-    // return this.http.get(this.documentsUrl+'?id=1');
+    return this.http.post(this.documentsUrl+'/upload/',document,this.httpOptions);
   }
 
   /** GET document by id. Return `undefined` when id not found */

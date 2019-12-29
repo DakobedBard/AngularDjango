@@ -3,9 +3,10 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework.decorators import  action
 from django.db.models import Q
 from upload.models import Document
-from .serializers import  DocumentSerializer, DocumentCreateSerializer, DocumentListSerializer
+from .serializers import  DocumentSerializer, DocumentCreateSerializer, FileSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
+from rest_framework import status
 User = get_user_model()
 from aws.s3Client import s3Client
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
@@ -70,3 +71,19 @@ class DocumentCreateAPIView(APIView):
             print("I get here3 in the server")
             print(serializer.errors)
             return Response(serializer.errors, status=400)
+
+class FileUploadView(APIView):
+    parser_class = (FileUploadParser,)
+
+    def post(self, request, *args, **kwargs):
+        if request is None:
+            print("why")
+        # print("request: " + request)
+        file_serializer = FileSerializer(data=request.data)
+
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print("wtf")
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
