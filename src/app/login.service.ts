@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { User } from './user'
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router'
 import {LoginResponse} from './login-response';
 import {Observable} from'rxjs';
+
 const httpOptions:any = { 
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   }),
-  observe:'response'
+  observe:'response',
 }; 
 @Injectable({
   providedIn: 'root'

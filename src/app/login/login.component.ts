@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,ReactiveFormsModule, FormBuilder,FormArray, Validators, FormControl } from '@angular/forms';
 import { LoginService } from '../login.service';
 import {User} from '../user'
+import { retry, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted  =  false;
   dataSaved = false;
+  jsondata;
   loginResponse;
   constructor(private loginService: LoginService, private formBuilder: FormBuilder,private router: Router ) { }
 
@@ -34,14 +36,22 @@ export class LoginComponent implements OnInit {
   
   loginUser(user:User){
     this.loginResponse = this.loginService.loginUser(user).pipe(
-      
+      tap(data => {
+        console.log(JSON.stringify(data));
+        this.jsondata = JSON.stringify(data);
+        console.log("length " +this.jsondata.length); 
+        let obj = JSON.parse(this.jsondata);
+        console.log("body " + JSON.stringify(obj.body.access)); 
+      }
+        
+       )
     )
       .subscribe(
-        data => {console.log("Thge data is " + data)},
+        data => {},
         error => {console.log(error);
       }
     )
-    console.log("The login repsonse is " + this.loginResponse)
+
   }
 
 }
