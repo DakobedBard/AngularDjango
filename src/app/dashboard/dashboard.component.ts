@@ -69,7 +69,10 @@ export class DashboardComponent implements OnInit {
     formData.append("name","firstupload");
     formData.append("extension","jpeg");
     formData.append("s3Path", "none")
-    this.dashboardService.createDocument(formData).subscribe(
+    let doc = new Document()
+    doc.name="first"
+    doc.up
+    this.documentService.createDocument(formData).subscribe(
       (res) => {
         this.response = res;
         console.log(res);

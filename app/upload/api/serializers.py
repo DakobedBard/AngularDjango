@@ -12,12 +12,7 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
             'uploaded_at',
             'uploadfile',
             'name',
-            's3Path',
-            'bucket',
-            'extension',
             'user',
-            'type',
-
         ]
     def validate(self,data):
         return data
