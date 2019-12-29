@@ -24,7 +24,8 @@ export class Service {
   /** GET documents from the server */
 
   getDocuments(id: any) {
-    return this.http.get(this.documentsUrl+'?id=1');
+    return this.http.get(this.documentsUrl);
+    // return this.http.get(this.documentsUrl+'?id=1');
   }
 
 

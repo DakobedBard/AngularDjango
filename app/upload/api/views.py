@@ -1,5 +1,5 @@
 from rest_framework import generics, mixins
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.decorators import  action
 from django.db.models import Q
 from upload.models import Document
@@ -10,7 +10,7 @@ User = get_user_model()
 from aws.s3Client import s3Client
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     def get_queryset(self):
         qs = Document.objects.all()
         query = self.request.GET.get("q")
