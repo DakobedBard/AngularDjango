@@ -71,10 +71,10 @@ export class DashboardComponent implements OnInit {
     formData.append("s3Path", "none")
     let doc = new Document()
     doc.name="first"
-    doc.up
+
     this.documentService.createDocument(formData).subscribe(
       (res) => {
-        this.response = res;
+
         console.log(res);
       },
       (err) => {  

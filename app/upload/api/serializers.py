@@ -28,9 +28,6 @@ class DocumentSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'uploaded_at',
-            's3Path',
-            'bucket',
-            'extension',
             'user'
         ]
 
