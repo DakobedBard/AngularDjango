@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, get_user_model
 from django.db.models import Q
-from rest_framework import generics, permissions
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
 from rest_framework_jwt.settings import api_settings
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
@@ -52,25 +53,17 @@ class UserCreateAPIView(CreateAPIView):
         else:
             return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-class UserLoginView(APIView):
-    permission_classes = [AllowAny]
+from rest_framework import generics, mixins
+class UserLoginView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = UserLoginSerializer
     print("I'm here ")
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        print("I'm also here")
-        serializer = UserLoginSerializer
-        data["token"] ='some random token'
-        if serializer.validate("",data):
-            return Response(data, status=HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-
-
-
-
-
-
+    def get(self, request, *args, **kwargs):
+        username = self.request.query_params.get('username', None)
+        username = username.split("/")[0]
+        print("username " +username)
+        userID = User.objects.only('id').get(username=username).id
+        return Response({'userid':userID}, status=HTTP_200_OK)
 
 
 

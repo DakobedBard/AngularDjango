@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class Service {
 
-  private documentsUrl = 'http://localhost:8000/documents/';  // URL to web api
+  private documentsUrl = 'http://localhost:8000/documents/list/1';  // URL to web api
   documents: any = [];
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,17 +24,10 @@ export class Service {
   /** GET documents from the server */
 
   getDocuments(id: any) {
-    return this.http.get(this.documentsUrl+'?id=1');
+    return this.http.get(this.documentsUrl);
+    // return this.http.get(this.documentsUrl+'?id=1');
   }
 
-
-  // getDocuments (): Observable<Document[]> {
-  //   return this.http.get<Document[]>(this.documentsUrl)
-  //     .pipe(
-  //       tap(_ => console.log('fetched documents')),
-  //       catchError(this.handleError<Document[]>('getDocuments', []))
-  //     );
-  // }
 
   /** GET document by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Document> {

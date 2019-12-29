@@ -9,4 +9,5 @@ urlpatterns = [
     re_path(r'api/auth/token',obtain_jwt_token),
     re_path('rest-auth/', include('rest_auth.urls')),
 
+
 ]

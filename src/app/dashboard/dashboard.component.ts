@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
     const formData = new FormData();
     formData.append('uploadfile', this.form.get('uploadfile').value);
     formData.append('bucket', 'basedjango');
-    formData.append('user', "1");
+    formData.append('user', "3");
     formData.append("type","image");
     formData.append("name","firstupload");
     formData.append("extension","jpeg");

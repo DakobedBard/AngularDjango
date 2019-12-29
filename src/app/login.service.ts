@@ -17,8 +17,9 @@ const httpOptions:any = {
 })
 export class LoginService {
   apiURL: string = 'http://localhost:8000/api/token';
+  loginURL: string = 'http://localhost:8000/api/auth/login';
   constructor(private  httpClient:HttpClient, private router:Router) { }
-
+  currentUser;
   public loginUser(user):Observable<LoginResponse>{
     return this.httpClient.post<LoginResponse>(`${this.apiURL}/`,user,<Object> httpOptions).pipe(
       tap(data => {
@@ -30,6 +31,15 @@ export class LoginService {
     let obj = JSON.parse(JSON.stringify(tokens));
     localStorage.setItem('access',obj.body.access)
     localStorage.setItem('refresh',obj.body.refresh)
+  }
+  public userID(user){
+    console.log(" user " + user.username)
+    return this.httpClient.get<User>(`${this.loginURL}/?username=${user.username}`).pipe(
+      tap(data => {
+        let obj = JSON.parse(JSON.stringify(data));
+        localStorage.setItem('currentUserID',JSON.stringify(obj.userid));  
+      })
+    )
   }
 
   logoutUser() {
