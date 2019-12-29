@@ -21,7 +21,8 @@
   
 
     </mat-list>
-    
+  <input type="file" name="uploadfile" (change)="onChange($event)" />
+    <button type="submit" (click)="onSubmit()">Upload File</button>
   </mat-grid-tile >
   <mat-grid-tile rowspan="2" style="background-color: coral;">
     <app-tab></app-tab>

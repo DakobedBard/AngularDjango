@@ -5,6 +5,7 @@ from django.conf import settings
 class Document(models.Model):
     name = models.CharField(max_length=30, default="document.txt")
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    uploadfile = models.FileField(upload_to='mediafiles/%Y/%m/%d/', max_length=255, null=True,blank=True)
     s3Path = models.CharField(max_length=500, default='document.txt')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bucket=models.CharField(max_length=50, default="basedjango")
