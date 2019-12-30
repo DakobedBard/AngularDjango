@@ -6,44 +6,29 @@ from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.decorators import  action
 from django.db.models import Q
-from uploadapp.models import Document, File, RestDocument
-from .serializers import  DocumentSerializer, DocumentCreateSerializer,DocumentFileSerializer
+from uploadapp.models import DocumentFile
+from .serializers import  DocumentFileSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import status
 User = get_user_model()
 from aws.s3Client import s3Client
-from uploadapp.api.serializers import FileSerializer
+
 
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
-    serializer_class = FileSerializer
+    serializer_class = DocumentFileSerializer
     permission_classes = [IsAuthenticated]
     def get_queryset(self):
-        qs = File.objects.all()
+        qs = DocumentFile.objects.all()
         query = self.request.GET.get("q")
         userID = self.request.query_params.get('id', None)
-        print("The request user is.. " + str(self.request.user))
         if query is not None:
             qs = qs.filter(Q(title__icontains=query))
         return qs
-    def post(self,request,*args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
-class FileUploadView(APIView):
-    parser_class = (FileUploadParser,)
-    def post(self, request, *args, **kwargs):
-        file_serializer = FileSerializer(data=request.data)
-        if file_serializer.is_valid():
-            filedata = file_serializer.save()
-            print("yo + " + str(request.data['file'] ))
-            newDocument = RestDocument()
-            newDocument.user = request.user
-
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class DocumentUploadView(APIView):
     parser_class = (FileUploadParser,)
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         file_serializer = DocumentFileSerializer(data=request.data)
         if file_serializer.is_valid():
