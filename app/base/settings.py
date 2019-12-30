@@ -67,11 +67,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     "accounts",
-    "upload",
     'corsheaders',
     "storages",
-    "uploadapp"
-
+    "uploadapp",
 ]
 SITE_ID=1
 AUTHENTICATION_BACKENDS = (

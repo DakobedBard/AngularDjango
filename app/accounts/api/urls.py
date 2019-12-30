@@ -4,7 +4,6 @@ from accounts.api.views import UserLoginView, UserCreateAPIView
 from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
-    re_path(r'register/$', UserCreateAPIView.as_view(), name='register'),
     re_path(r'login/', UserLoginView.as_view(),name='login'),
     re_path(r'api/auth/token',obtain_jwt_token),
 ]

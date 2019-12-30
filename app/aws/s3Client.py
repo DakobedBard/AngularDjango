@@ -6,8 +6,7 @@ from botocore.exceptions import ClientError
 import os
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
-from upload.models import Document
+from uploadapp.models import Document
 class s3Client:
     def __init__(self, bucketname):
         self.bucket = bucketname
