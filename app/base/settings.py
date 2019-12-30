@@ -67,7 +67,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     "accounts",
-    "upload",
     'corsheaders',
     "storages",
     "uploadapp"
