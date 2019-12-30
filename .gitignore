@@ -12,7 +12,7 @@ data/*
 node_modules/*
 app/mediafiles/*
 app/accounts/migrations/*
-app/upload/migrations/*
+app/uploadapp/migrations/*
 app/tab_generator/migrations/*
 app/users/migrations*
 .idea/*

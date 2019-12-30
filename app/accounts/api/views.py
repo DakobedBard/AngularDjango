@@ -57,11 +57,9 @@ from rest_framework import generics, mixins
 class UserLoginView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserLoginSerializer
-    print("I'm here ")
     def get(self, request, *args, **kwargs):
         username = self.request.query_params.get('username', None)
         username = username.split("/")[0]
-        print("username " +username)
         userID = User.objects.only('id').get(username=username).id
         return Response({'userid':userID}, status=HTTP_200_OK)
 

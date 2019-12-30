@@ -1,3 +1,3 @@
 #! /bin/bash
-sudo docker exec djangoapp python manage.py makemigrations
+sudo docker exec -it djangoapp python manage.py makemigrations
 
