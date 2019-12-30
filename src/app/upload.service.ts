@@ -10,10 +10,7 @@ export class UploadService {
   DJANGO_SERVER: string = "http://127.0.0.1:8000";
   constructor(private http: HttpClient) { }
 
-  public upload(formData) {
-    return this.http.post<any>(`${this.DJANGO_SERVER}/upload/`, formData);
-  }
-   public uploadDocument(formData) {
+  public uploadDocument(formData) {
     return this.http.post<any>(`${this.DJANGO_SERVER}/upload/documents`, formData);
   }
   getDocuments(id: any) {
