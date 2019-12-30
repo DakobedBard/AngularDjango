@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class Service {
 
-  private documentsUrl = 'http://localhost:8000/documents';
+  private documentsUrl = 'http://localhost:8000/upload/';
   documents: any = [];
   httpOptions:any = { 
     headers: new HttpHeaders({

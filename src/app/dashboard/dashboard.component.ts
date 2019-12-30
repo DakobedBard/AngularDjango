@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   private fileData = null;
   constructor(
     private route: ActivatedRoute,
-    private documentService: Service,
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private uploadService: UploadService
@@ -30,6 +29,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+      this.getDocuments()
       this.form = this.formBuilder.group({
         profile: ['']
       });
@@ -59,16 +59,14 @@ export class DashboardComponent implements OnInit {
       );
     }
 
-
   getDocuments(): void {
     const id = localStorage.getItem('currentUserID')
     console.log("I got documents " + id);
-    this.documentService.getDocuments(id)
+    this.uploadService.getDocuments(id)
       .subscribe((data => {
         for (const d of (data as any)) {
           this.documents.push({
-            name: d.name,
-
+            file: d.file,
           });
         }
     }))

@@ -6,7 +6,7 @@ from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.decorators import  action
 from django.db.models import Q
-from uploadapp.models import Document
+from uploadapp.models import Document, File
 from .serializers import  DocumentSerializer, DocumentCreateSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
@@ -16,10 +16,10 @@ from aws.s3Client import s3Client
 from uploadapp.api.serializers import FileSerializer
 
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
-    serializer_class = DocumentSerializer
+    serializer_class = FileSerializer
     permission_classes = [IsAuthenticated]
     def get_queryset(self):
-        qs = Document.objects.all()
+        qs = File.objects.all()
         query = self.request.GET.get("q")
         userID = self.request.query_params.get('id', None)
 
