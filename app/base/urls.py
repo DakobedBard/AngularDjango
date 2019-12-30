@@ -8,12 +8,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(r'rest-auth/', include('rest_auth.urls')),
     path(r'rest-auth/registration/', include('rest_auth.registration.urls')),
+    re_path(r'api/auth/', include('accounts.api.urls'), name='api-auth'),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r'api/auth/', include('accounts.api.urls'), name='api-auth'),
-    path('api/auth/token/', views.obtain_auth_token, name='api-token-auth'),
-    # path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('documents/', include('upload.api.urls'), name='documents' ),
     path('upload/', include('uploadapp.api.urls')),
     # Upload
