@@ -13,7 +13,8 @@ import { MatToolbarModule,
   MatProgressSpinnerModule,
   MatInputModule,
   MatTabsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule
   
 } from '@angular/material';
 import { MatBadgeModule} from '@angular/material/badge';
@@ -33,7 +34,8 @@ const MaterialsComponents = [
   MatProgressSpinnerModule,
   MatInputModule,
   MatTabsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule
 ];
 
 
