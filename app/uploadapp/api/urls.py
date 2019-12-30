@@ -8,5 +8,6 @@ urlpatterns = [
     # path(r'create/$', DocumentCreateAPIView.as_view(), name='create'),
     # path(r'^list/(?P<id>.+)/$', DocumentAPIView.as_view(), name='list-users'),
 
-    path('', FileUploadView.as_view())
+    path('', FileUploadView.as_view()),
+    path('documents',(DocumentUploadView.as_view()))
 ]

@@ -13,6 +13,9 @@ export class UploadService {
   public upload(formData) {
     return this.http.post<any>(`${this.DJANGO_SERVER}/upload/`, formData);
   }
+   public uploadDocument(formData) {
+    return this.http.post<any>(`${this.DJANGO_SERVER}/upload/documents`, formData);
+  }
   getDocuments(id: any) {
     console.log("id " + id)
     return this.http.get(this.documentsUrl+'/list/');

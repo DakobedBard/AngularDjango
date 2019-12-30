@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from uploadapp.models import File
+from uploadapp.models import File, DocumentFile
 from uploadapp.models import Document
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,3 +39,22 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
         fields = "__all__"
+    def create(self, data):
+        instance = File.objects.create(**data)
+        print("i'm here..")
+        return data
+
+class DocumentFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentFile
+        fields = "__all__"
+
+
+
+class DocumentSerializer(serializers.ModelSerializer):
+    file = FileSerializer()
+    class Meta:
+        model = Document
+        fields = "__all__"
+    def create(self):
+        print("i'm here..")

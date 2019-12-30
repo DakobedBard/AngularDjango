@@ -41,6 +41,11 @@
     <button type="submit">Upload Image File</button>
 
   </form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit2()">
+    <input type="file" name="profile" (change)="onChange2($event)" />
+    <button type="submit">Upload Document File</button>
+
+  </form>
 </div>
   </mat-grid-tile>
 

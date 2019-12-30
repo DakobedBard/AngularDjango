@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   DJANGO_SERVER = 'http://127.0.0.1:8000'
   documents: any = [];
   form: FormGroup;
+  form2: FormGroup;
   filename
   response;
   imageURL;
@@ -31,6 +32,9 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
       this.getDocuments()
       this.form = this.formBuilder.group({
+        profile: ['']
+      });
+      this.form2 = this.formBuilder.group({
         profile: ['']
       });
     }
@@ -58,6 +62,33 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
+
+    onChange2(event) {
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        this.form2.get('profile').setValue(file);
+      }
+    }
+  
+    onSubmit2() {
+      const formData = new FormData();
+      formData.append('file', this.form2.get('profile').value);
+      formData.append('user', JSON.stringify(1));
+      formData.append('name', "doc from UI");
+
+      this.uploadService.upload(formData).subscribe(
+        (res) => {
+          this.response = res;
+          this.imageURL = `${this.DJANGO_SERVER}${res.file}`;
+            console.log(res);
+            console.log(this.imageURL);
+        },
+        (err) => {  
+          console.log(err);
+        }
+      );
+    }
+
 
   getDocuments(): void {
     const id = localStorage.getItem('currentUserID')
