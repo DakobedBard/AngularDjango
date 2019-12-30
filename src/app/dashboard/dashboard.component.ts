@@ -32,7 +32,8 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
       this.getDocuments()
       this.form = this.formBuilder.group({
-        profile: ['']
+        profile: [''],
+        name: ['']
       });
 
     }
@@ -49,7 +50,7 @@ export class DashboardComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.form.get('profile').value);
       formData.append('name', this.form.get('name').value);
-      formData.append('user', localStorage.get('currentUserID'));
+      formData.append('user', localStorage.getItem('currentUserID'));
 
       this.uploadService.uploadDocument(formData).subscribe(
         (res) => {

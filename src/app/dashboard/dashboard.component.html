@@ -10,7 +10,7 @@
 
 </head>
 <mat-grid-list cols="2" rowHeight="2:1" gutterSize="3px">
-  <mat-grid-tile >
+  <mat-grid-tile rowspan="2"  >
     <mat-list>
       <h3 mat-subheader>Documents</h3>
       <mat-list-item *ngFor="let document of documents">
@@ -25,7 +25,7 @@
 
     
 
-  </mat-grid-tile >
+  </mat-grid-tile   >
   <mat-grid-tile rowspan="2" style="background-color: coral;">
     <app-tab></app-tab>
     <div *ngIf="response && imageURL">
@@ -38,7 +38,7 @@
 
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="name" placeholder="Document Name" formControlName="name">
+    <input type="name" placeholder="Document Name" name="name">
     <input type="file" name="profile" (change)="onChange($event)" />
     <button type="submit">Upload Document File</button>
 
