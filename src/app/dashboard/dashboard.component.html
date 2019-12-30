@@ -38,6 +38,7 @@
 
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="name" placeholder="Document Name" formControlName="name">
     <input type="file" name="profile" (change)="onChange($event)" />
     <button type="submit">Upload Document File</button>
 
