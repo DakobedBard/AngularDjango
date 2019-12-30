@@ -6,6 +6,7 @@ import { DocumentDetailComponent }  from './document-detail/document-detail.comp
 import { UploadComponent } from './upload/upload.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {DocumentComponent} from './document/document.component';
 const routes: Routes = [                                  
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'dashboard/:id', component: DashboardComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'document', component: DocumentComponent },
 ];
 
 @NgModule({

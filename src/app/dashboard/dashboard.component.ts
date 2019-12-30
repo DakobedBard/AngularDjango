@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '../document.service';
 import { Document } from '../document';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DashboardService } from '../dashboard.service';
+
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private documentService: Service,
     private formBuilder: FormBuilder,
-    private dashboardService: DashboardService,
     private httpClient: HttpClient,
 
     ) { }

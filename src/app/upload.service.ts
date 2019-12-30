@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from  '@angular/common/http';  
-import { map } from  'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
-	SERVER_URL: string = "https://file.io/";  
-	constructor(private httpClient: HttpClient) { }
-  public upload(formData) {
 
-    return this.httpClient.post<any>(this.SERVER_URL, formData, {  
-        reportProgress: true,  
-        observe: 'events'  
-      });  
+  DJANGO_SERVER: string = "http://127.0.0.1:8000";
+  constructor(private http: HttpClient) { }
+
+  public upload(formData) {
+    return this.http.post<any>(`${this.DJANGO_SERVER}/upload/`, formData);
   }
-  
 }

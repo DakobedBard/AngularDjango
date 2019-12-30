@@ -20,6 +20,7 @@ import { TabComponent } from './tab/tab.component';
 import { TabLineComponent } from './tab-line/tab-line.component';
 import { RegisterComponent } from './register/register.component'
 import { TokenInterceptorService } from './token-interceptor.service'
+import {DocumentComponent} from './document/document.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import { TokenInterceptorService } from './token-interceptor.service'
     LoginComponent,
     TabComponent,
     TabLineComponent,
-    RegisterComponent
+    RegisterComponent,
+    DocumentComponent
 
   ],
   providers: [{

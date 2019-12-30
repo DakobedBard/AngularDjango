@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "upload",
     'corsheaders',
     "storages",
+    "uploadapp"
 
 ]
 SITE_ID=1
