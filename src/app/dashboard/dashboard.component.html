@@ -43,7 +43,13 @@
             </mat-list-item>
      
           </mat-list>
-     
+          
+
+          <form [formGroup]="deleteForm" (ngSubmit)="onDelete()">
+            <button type="submit">Delete</button>
+          </form>
+
+
         </mat-card-content>
       </mat-card>
     </div>
