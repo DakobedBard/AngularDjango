@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   DJANGO_SERVER = 'http://127.0.0.1:8000'
   documents: any = [];
   form: FormGroup;
+  deleteForm: FormGroup;
   isSubmitted  =  false;
   filename
   response;
@@ -34,6 +35,10 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
       this.getDocuments()
       this.form = this.formBuilder.group({
+        profile: [''],
+        name: ['']
+      });
+      this.deleteForm = this.formBuilder.group({
         profile: [''],
         name: ['']
       });
@@ -84,6 +89,18 @@ export class DashboardComponent implements OnInit {
           })
         }
     }))
+  }
+  onDelete(){
+    console.log("I get called!");
+    let index = 0;
+    for (let value of Object.values(this.checkbox_list)) {
+      if(value.checked){
+        console.log("Document " + index + " is to be deleted" )
+      }
+      index++;
+  
+
+    }
   }
 
   master_change() {
