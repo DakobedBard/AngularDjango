@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      // this.getDocuments()
+      this.getDocuments()
       this.form = this.formBuilder.group({
         profile: ['']
       });

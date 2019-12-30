@@ -11,7 +11,6 @@ import { DocumentDetailComponent }  from './document-detail/document-detail.comp
 
 import { DocumentSearchComponent }  from './document-search/document-search.component';
 import { MessagesComponent }    from './messages/messages.component';
-import { UploadComponent } from './upload/upload.component'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
@@ -20,7 +19,7 @@ import { TabComponent } from './tab/tab.component';
 import { TabLineComponent } from './tab-line/tab-line.component';
 import { RegisterComponent } from './register/register.component'
 import { TokenInterceptorService } from './token-interceptor.service'
-import {DocumentComponent} from './document/document.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -42,12 +41,11 @@ import {DocumentComponent} from './document/document.component';
     DocumentDetailComponent,
     MessagesComponent,
     DocumentSearchComponent,
-    UploadComponent,
     LoginComponent,
     TabComponent,
     TabLineComponent,
     RegisterComponent,
-    DocumentComponent
+
 
   ],
   providers: [{
