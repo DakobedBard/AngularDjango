@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   DJANGO_SERVER = 'http://127.0.0.1:8000'
   documents: any = [];
   form: FormGroup;
-
+  isSubmitted  =  false;
   filename
   response;
   imageURL;
