@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.decorators import  action
+from django.http import HttpResponse
 from django.db.models import Q
 from uploadapp.models import DocumentFile
 from .serializers import  DocumentFileSerializer
@@ -14,6 +14,20 @@ from rest_framework import status
 User = get_user_model()
 from aws.s3Client import s3Client
 
+class DocumentFileDetailView(APIView):
+    def get_object(self,id):
+        try:
+            return DocumentFile.objects.get(id=id)
+        except DocumentFile.DoesNotExist as e:
+            return Response({"error":"Given document does not exist"})
+    def get(self,request, id = None):
+        instance = self.get_object
+
+    def delete(self,request,id =None):
+        instance = self.get_object(id)
+        print("instance name " + instance.name)
+        instance.delete()
+        return HttpResponse(status=204)
 
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentFileSerializer
