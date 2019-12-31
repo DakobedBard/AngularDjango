@@ -15,19 +15,24 @@ User = get_user_model()
 from aws.s3Client import s3Client
 
 class DocumentFileDetailView(APIView):
-    def get_object(self,id):
-        try:
-            return DocumentFile.objects.get(id=id)
-        except DocumentFile.DoesNotExist as e:
-            return Response({"error":"Given document does not exist"})
+
     def get(self,request, id = None):
         instance = self.get_object
-
+    def post(self,request,*args,**kwargs):
+        file_serializer = DocumentFileSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def delete(self,request,id =None):
-        instance = self.get_object(id)
-        print("instance name " + instance.name)
-        instance.delete()
-        return HttpResponse(status=204)
+        try:
+            doc = DocumentFile.objects.get(id=id)
+            doc.delete()
+            return HttpResponse(status=204)
+        except DocumentFile.DoesNotExist as e:
+            return Response({"error": "Given question object not found."}, status=404)
+        print("innstance" + doc.name)
 
 class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = DocumentFileSerializer
@@ -39,14 +44,3 @@ class DocumentListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         if query is not None:
             qs = qs.filter(Q(title__icontains=query))
         return qs
-
-class DocumentUploadView(APIView):
-    parser_class = (FileUploadParser,)
-    permission_classes = [IsAuthenticated]
-    def post(self, request, *args, **kwargs):
-        file_serializer = DocumentFileSerializer(data=request.data)
-        if file_serializer.is_valid():
-            file_serializer.save()
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

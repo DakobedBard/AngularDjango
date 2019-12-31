@@ -8,4 +8,5 @@ class DocumentFile(models.Model):
     name = models.CharField(max_length=30, default="document.txt")
     uploaded_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default =1 )
-
+    def __str__(self):
+        return "The dioc is " + self.name + " and the user is " + self.user
