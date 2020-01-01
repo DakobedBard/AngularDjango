@@ -5,6 +5,7 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { DocumentDetailComponent }  from './document-detail/document-detail.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import { HowlComponent } from './howl/howl.component';
 
 
 const routes: Routes = [                                  
@@ -14,6 +15,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'howl', component: HowlComponent },
 
 ];
 

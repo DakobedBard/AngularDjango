@@ -22,6 +22,7 @@ export class HowlComponent implements OnInit {
        return songArray.length;
   }
   ngOnInit() {
+    document.createElement('div1');
   }
 
 }
