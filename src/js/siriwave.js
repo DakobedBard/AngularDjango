@@ -1,5 +1,5 @@
 /* Modified from https://github.com/CaffeinaLab/SiriWaveJS */
-
+export { SiriWave}
 (function() {
 
 function SiriWave(opt) {

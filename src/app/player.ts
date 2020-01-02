@@ -1,5 +1,5 @@
 import {Howl, Howler} from 'howler';
-
+import * as Siri from '../js/siriwave.js';
 export class Player {
   index = 0;
   elms = ['track', 'timer', 'duration', 'playBtn', 'pauseBtn','prevBtn', 'nextBtn',

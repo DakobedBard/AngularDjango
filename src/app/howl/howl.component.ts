@@ -7,6 +7,7 @@ import { HowlService } from '../howl.service'
 })
 export class HowlComponent implements OnInit {
   index = 0;
+  
   // elms = ['track', 'timer', 'duration', 'playBtn', 'pauseBtn','prevBtn', 'nextBtn',
   //  'playlistBtn', 'volumeBtn', 'progress', 'bar','wave', 'loading', 'playlist', 
   //  'list', 'volume', 'barEmpty', 'barFull', 'sliderBtn'];
