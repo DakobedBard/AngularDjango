@@ -11,10 +11,14 @@ export class UploadService {
   constructor(private http: HttpClient) { }
 
   public uploadDocument(formData) {
-    return this.http.post<any>(`${this.DJANGO_SERVER}/upload/documents`, formData);
+    return this.http.post<any>(`${this.DJANGO_SERVER}/upload/create/`, formData);
   }
   getDocuments(id: any) {
     console.log("id " + id)
     return this.http.get(this.documentsUrl+'/list/');
   }
+  delete(id:any){
+    return this.http.delete<any>(`${this.DJANGO_SERVER}/upload/${id}/delete/`);
+  }
+
 }
