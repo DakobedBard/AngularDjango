@@ -45,7 +45,6 @@ Player.prototype = {
   play: function(index) {
     var self = this;
     var sound;
-
     index = typeof index === 'number' ? index : self.index;
     var data = self.playlist[index];
 

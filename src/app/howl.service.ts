@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { skipPartiallyEmittedExpressions } from 'typescript';
 // import { SiriWave} from '../js/siriwave'
 @Injectable({
   providedIn: 'root'
@@ -7,24 +8,27 @@ export class HowlService {
   playlist : any;
   // wave: SiriWave;
   constructor() { 
-   this.playlist=  {
-      title: 'song',
+   this.playlist=  [{
+      title: 'songHello',
       file: 'song.wav',
       howl: null
-    }
-    // this.wave = this.createWave
+    }]
+    this.createPlayList()
   }
-
-  // createWave(){
-  //   return new SiriWave({
-  //     container: waveform,
-  //     width: window.innerWidth,
-  //     height: window.innerHeight * 0.3,
-  //     cover: true,
-  //     speed: 0.03,
-  //     amplitude: 0.7,
-  //     frequency: 2
-  //   });
-  // }
-
+  createPlayList(){
+      // Setup the playlist display.
+      this.playlist.forEach(function(song) {
+        var div = document.createElement('div');
+        div.className = 'list-song';
+        div.innerHTML = song.title;
+        console.log("song: " + song.title)
+        div.onclick = function() {
+          // this.skipTo(playlist.indexOf(song));
+        };
+      })
+      // list.appendChild(div);
+    
+  }
 }
+
+
