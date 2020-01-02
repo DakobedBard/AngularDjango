@@ -19,7 +19,8 @@ import { TabComponent } from './tab/tab.component';
 import { TabLineComponent } from './tab-line/tab-line.component';
 import { RegisterComponent } from './register/register.component'
 import { TokenInterceptorService } from './token-interceptor.service';
-import { HowlComponent } from './howl/howl.component'
+import { HowlComponent } from './howl/howl.component';
+import { UploadComponent } from './upload/upload.component'
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { HowlComponent } from './howl/howl.component'
     TabLineComponent,
     RegisterComponent,
     HowlComponent,
+    UploadComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

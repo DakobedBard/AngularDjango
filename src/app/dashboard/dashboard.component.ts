@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '../document.service';
 import { Document } from '../document';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router'
 
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { UploadService } from '../upload.service';
@@ -29,8 +30,13 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router
     ) { }
+
+    refresh(): void{
+
+    }
 
     ngOnInit() {
       this.getDocuments()
@@ -64,6 +70,7 @@ export class DashboardComponent implements OnInit {
         (res) => {
           this.response = res;
           this.imageURL = `${this.DJANGO_SERVER}${res.file}`;
+          this.getDocuments();
         },
         (err) => {  
           console.log(err);
@@ -88,7 +95,6 @@ export class DashboardComponent implements OnInit {
             checked: false,
             labelPosition: "after"
           })
-
         }
     }))
   }
@@ -96,10 +102,10 @@ export class DashboardComponent implements OnInit {
     console.log("I get called!");
     for (let value of Object.values(this.checkbox_list)) {
       if(value.checked){
-        console.log("Document " + value.id + " is to be deleted" )
         this.uploadService.delete(value.id).subscribe(
           (res) => {
-            console.log()
+            this.getDocuments()
+            console.log(res)
           },
           (err) => {  
             console.log(err);
@@ -107,6 +113,8 @@ export class DashboardComponent implements OnInit {
         );
       }
     }
+
+    this.ngOnInit();
   }
 
   master_change() {
