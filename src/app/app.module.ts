@@ -20,7 +20,8 @@ import { TabLineComponent } from './tab-line/tab-line.component';
 import { RegisterComponent } from './register/register.component'
 import { TokenInterceptorService } from './token-interceptor.service';
 import { HowlComponent } from './howl/howl.component';
-import { UploadComponent } from './upload/upload.component'
+import { UploadComponent } from './upload/upload.component';
+import { DocumentListComponent } from './document-list/document-list.component'
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { UploadComponent } from './upload/upload.component'
     RegisterComponent,
     HowlComponent,
     UploadComponent,
+    DocumentListComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
