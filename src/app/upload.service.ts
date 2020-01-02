@@ -17,4 +17,8 @@ export class UploadService {
     console.log("id " + id)
     return this.http.get(this.documentsUrl+'/list/');
   }
+  delete(id:any){
+    return this.http.delete<any>(`${this.DJANGO_SERVER}/upload/${id}/delete/`);
+  }
+
 }

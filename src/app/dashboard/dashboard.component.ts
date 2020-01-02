@@ -83,23 +83,29 @@ export class DashboardComponent implements OnInit {
           });
           this.checkbox_list.push({
             name: d.name,
+            id: d.id,
             disabled: false,
             checked: false,
             labelPosition: "after"
           })
+
         }
     }))
   }
   onDelete(){
     console.log("I get called!");
-    let index = 0;
     for (let value of Object.values(this.checkbox_list)) {
       if(value.checked){
-        console.log("Document " + index + " is to be deleted" )
+        console.log("Document " + value.id + " is to be deleted" )
+        this.uploadService.delete(value.id).subscribe(
+          (res) => {
+            console.log()
+          },
+          (err) => {  
+            console.log(err);
+          }
+        );
       }
-      index++;
-  
-
     }
   }
 
