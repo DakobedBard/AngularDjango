@@ -18,13 +18,10 @@ export class DashboardComponent implements OnInit {
   DJANGO_SERVER = 'http://127.0.0.1:8000'
   documents: any = [];
   form: FormGroup;
-  deleteForm: FormGroup;
-  isSubmitted  =  false;
   filename
   response;
   imageURL;
   checkbox_list = [];
-  private fileData = null;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -41,15 +38,13 @@ export class DashboardComponent implements OnInit {
       
     }
 
-
     onChange(event) {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         this.form.get('profile').setValue(file);
       }
     }
-    
-  
+      
     onSubmit() {
       const formData = new FormData();
       formData.append('file', this.form.get('profile').value);
@@ -67,8 +62,6 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
-
-
 
   list_change(){
     let checked_count = 0;

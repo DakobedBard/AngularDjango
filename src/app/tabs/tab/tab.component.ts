@@ -23,8 +23,10 @@ export class TabComponent implements OnInit {
     this.tab  = [
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 ||'},
       {tab_string: '$A  1 3 | $2 5 3 0 ||'},
-      {tab_string: this.tablines.pop().generateString()}
+      {tab_string: this.tablines[0].generateString()},
+      
     ];
+
 
   };
 

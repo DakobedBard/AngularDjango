@@ -1,18 +1,19 @@
 export class TabLine{
     measures: Measure[] = []
-    outputString;
+    outputString="";
     constructor(){
 
         let measure = new Measure([{
                 gString:"e",
                 fret:2,
-                beat:2,
+                beat:0,
         }])
         this.measures.push(measure)
     }
     generateString(){
         this.measures.forEach(measure => {
-            this.outputString += measure.measureString;
+            this.outputString += measure.generateString();
+            console.log(measure.generateString())
         });
         return this.outputString;
     }
@@ -20,7 +21,7 @@ export class TabLine{
 
 export class Measure{
     notes;
-    outputString;
+    outputString ="";
     constructor(notes: Array<Note>){
         this.notes = notes;
         let beatIndex = 0;
@@ -32,11 +33,9 @@ export class Measure{
 
     }
     addtoSring(note: Note){
-        this.outputString += "$2 5 3 0 "
+        this.outputString += "$2 5 3 0 4 "
     }
     generateString(){
-    }
-    measureString(){
         return this.outputString + '||'
     }
 }
