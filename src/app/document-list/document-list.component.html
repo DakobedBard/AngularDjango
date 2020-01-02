@@ -2,22 +2,13 @@
     <mat-card>
       <mat-card-title>Documents</mat-card-title>
       <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <mat-checkbox
-            [(ngModel)]="master_checked"
-            [(indeterminate)]="master_indeterminate"
-            (change)="master_change()"
-            ><b>Check/ Uncheck All</b></mat-checkbox>
-          </mat-list-item>
-   
+        <mat-list>   
           <mat-list-item *ngFor="let document of checkbox_list">
             <mat-checkbox
             [(ngModel)]="document.checked"
             [disabled]="document.disabled"
             [labelPosition]="document.labelPosition"
-            (change)="list_change()"
-            > 
+            (change)="list_change()" > 
       
             <button mat-button ng-href="/login/" target="_blank">{{document.name}}</button>
           
@@ -27,8 +18,7 @@
         </mat-list>
         
         <button type="submit" (click)=onDelete()>Delete</button>
-   
-
+  
       </mat-card-content>
     </mat-card>
 
