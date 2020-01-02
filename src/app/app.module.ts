@@ -57,7 +57,8 @@ import { ChordLineComponent } from './tabs/chord-line/chord-line.component'
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
-    multi: true
+    multi: true,
+    
   }],
   bootstrap: [ AppComponent ]
 })
