@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TabService {
-  notes: Array<NoteClass>;
+  notes;
   private pointer = 0;
   lines : TabLine[] = [];
   nlines = 0;
@@ -20,16 +20,16 @@ export class TabService {
         }
      ,
     ];
-    // console.log("note " + this.notes.pop().getString())
     this.generateLines()
   }
   nLines(){
       return this.lines.length;
   }
   generateLines(){
-    let line = new TabLine([this.notes]);
-    console.log(this.notes.pop().getString())
-    this.lines.push(line)
+    let noteArray : NoteClass[] = []
+    let line = new TabLine([this.notes[0]]);
+    console.log("Length " + this.notes[0].getString())
+    // this.lines.push(line)
   }
   generateString(){
 
@@ -45,6 +45,7 @@ export class TabLine{
   notes : Array<NoteClass>;
   constructor(notes){
     this.notes = notes;
+    console.log("LengthInMeasure " + this.notes[0].getString())
     this.notes.forEach(note => {
  
     });
@@ -77,17 +78,16 @@ export class TabLine{
 
 export class Measure{
     notes;
-    outputString;
+    outputString = " ";
     constructor(notes: Array<NoteClass>){
-        this.notes = notes;
-        this.outputString = ''
-        let beatIndex = 0;
-        let beats = []
-        notes.forEach(note => {
+      console.log("notes " + notes.length)
 
-            this.addtoMeasure(note)
-            beats.push(note.beat)    
-        });
+
+        // notes.forEach(note => {
+
+        //     this.addtoMeasure(note)
+
+        // });
 
     }
     addtoMeasure(note: NoteClass){
