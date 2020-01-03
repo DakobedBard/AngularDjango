@@ -15,14 +15,14 @@ export class TabService {
           beat:1,
         },
         {
-          gString:'A',
+          gString:'D',
           fret:'3',
-          beat:2,
+          beat:1,
         },
         {
           gString:'B',
           fret:'4',
-          beat:3,
+          beat:7,
         },
         {
           gString:'A',
@@ -30,9 +30,14 @@ export class TabService {
           beat:4,
         },
         {
-          gString:'A',
+          gString:'G',
           fret:'2',
-          beat:5,
+          beat:4,
+        },
+        {
+          gString:'D',
+          fret:'2',
+          beat:4,
         },
         {
           gString:'A',
@@ -44,6 +49,11 @@ export class TabService {
           fret:'2',
           beat:7,
         },
+        {
+          gString:'A',
+          fret:'2',
+          beat:14,
+        },
     ];
     this.generateLines();
   }
@@ -51,9 +61,7 @@ export class TabService {
     let arr: NoteClass[];
     let beatMap = new Map<number, Array<NoteClass>>();
     this.notes.sort((a, b) => (a.beat > b.beat) ? 1 : -1)
-    console.log("Generating beat map therer are " + this.notes.length)
     this.notes.forEach((note,index) => {
-      console.log("index:" + index)
       try {
         arr = beatMap.get(note.beat)
         arr.push(note)
@@ -69,8 +77,11 @@ export class TabService {
   iteratebeats(map: Map<number, Array<NoteClass>>):Array<Measure>{
     let measureArray: Measure[] = []
     let measure = new Measure()
-    console.log("I am here in iterate")
     let currentBeat = 0;
+
+    let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
+    console.log("Max beats " + maximumBeats)
+
     map.forEach((noteArray,beat) => {
       if(beat>currentBeat){
         for (let i = 0; i < beat-currentBeat; i++) {
@@ -84,11 +95,10 @@ export class TabService {
         measure.addNotes(noteArray);
       }
       noteArray.forEach(note => {
-        console.log("I'm at key " + beat + " with a beat of " + note.fret);
+        // console.log("I'm at key " + beat + " with a beat of " + note.fret);
       });
     });
-    measureArray.push(measure)
-    console.log("The measure looks like " + measure.generateString)
+    measureArray.push(measure);
     return measureArray;
   }
 
@@ -127,11 +137,10 @@ export class Measure{
 
     addNote(note: NoteClass){
         this.notes.push(note);
-        this.outputString += `$${note.gString} ${note.fret} `;
-        
+        this.outputString += `$${note.gString} ${note.fret}`;  
     }
     generateString(){
-        return this.outputString;
+        return this.outputString + " |";
     }
     addNotes(notes: Array<NoteClass>){
       notes.forEach(note => {

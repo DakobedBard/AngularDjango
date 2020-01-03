@@ -17,7 +17,7 @@ export class TabComponent implements OnInit {
   tablines: TabLine[];
   tabService: TabService
   constructor(tabService: TabService) { 
-    this.tabService = tabService;
+    this.tabService = new TabService();
   }
   ngOnInit() {
 
