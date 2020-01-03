@@ -16,14 +16,14 @@ export class TabService {
           fret:'2',
           beat:0,
           rest:false,
-          getString: () => '$ A 2 '
+          getString: () => '$A 2 '
         },
         {
           gString:'A',
           fret:'3',
           beat:1,
           rest:false,
-          getString: () => '$ A 3 '
+          getString: () => '$A 3 '
         },
     ];
     this.generateLines()
@@ -34,7 +34,7 @@ export class TabService {
   generateLines(){
     let noteArray : NoteClass[] = []
     let line = new TabLine(this.notes);
-    // this.lines.push(line)
+    this.lines.push(line)
   }
   generateString(){
 
@@ -57,19 +57,7 @@ export class TabLine{
     this.notes.forEach(note => {
       console.log("LengthInMeasure " + note.getString());
       measure.addtoMeasure(note);
-      // this.outputString += note.
     });
-    // this.notes.forEach(note => {
-    //     measure.addtoMeasure(note);
-    //     if(note.fret=='|'){
-    //       console.log("I see the end of a measure..")
-    //       this.measures.push(measure)
-    //       measure = new Measure([])
-    //     }else if(note.fret=='||'){
-    //       this.measures.push(measure)
-    //       measure = new Measure([])
-    //     }
-    // });
     this.measures.push(measure)
   }
   toString():string{
