@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "storages",
     "uploadapp",
+    "tabs"
 ]
 SITE_ID=1
 AUTHENTICATION_BACKENDS = (
