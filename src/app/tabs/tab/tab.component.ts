@@ -7,8 +7,6 @@ import { TabService } from '../../tab.service'
   providers:[TabService]
 })
 export class TabComponent implements OnInit {
-
-
   tab;
   chords
   measuresPerLine =5;
@@ -16,28 +14,22 @@ export class TabComponent implements OnInit {
   totalMeasures;
   notevalue = 4
   beatsPerBar = 4;
-  tablines: TabLine[] = []
+  tablines: TabLine[];
   tabService: TabService
   constructor(tabService: TabService) { 
     this.tabService = tabService;
-    this.tablines.push(new TabLine())
   }
   ngOnInit() {
 
     this.tab  = [
-      {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 ||'},
-      {tab_string: '$A  1 3 | $2 5 3 0 ||'},  
+      {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
-    this.tablines = this.tabService.lines
-    console.log("Thare are " + this.tablines.length)
-
-    this.tablines.forEach((line, index) => {
-      console.log("tablines " + index +  " index " +  line.generateString())
+    let tablines = this.tabService.getLines()
+    tablines.forEach((line, index) => {
       this.tab.push({
         tab_string:line.generateString()
       })
     });
-    console.log("tab service " + this.tabService.nextLine().value)
 
   };
 
