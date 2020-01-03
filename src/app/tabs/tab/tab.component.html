@@ -1,9 +1,14 @@
-<mat-list>
-  <mat-list-item  *ngFor="let line of tab" style="padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 4px;">
-    <app-tab-line [tab_string]= line.tab_string matLine>
-    </app-tab-line>
-  </mat-list-item>
-</mat-list>
+<link type="text/css" rel="stylesheet" href="http://jtab.tardate.com/css/jtab-helper.css"/>
+
+<mat-card>
+  <mat-list style="padding-top: 135px; ">
+    <mat-list-item  *ngFor="let line of tab" style="padding-top: 15px;
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 4px;">
+      <app-tab-line [tab_string]= line.tab_string matLine>
+      </app-tab-line>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>
