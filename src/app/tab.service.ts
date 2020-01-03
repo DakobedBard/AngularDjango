@@ -4,40 +4,108 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TabService {
-  notes;
-  private pointer = 0;
+  notes: Array<NoteClass>;
   lines : TabLine[] = [];
-  nlines = 0;
-  currentMeasure = 0;
+  
   constructor() { 
     this.notes = [
         {
           gString:'A',
           fret:'2',
-          beat:0,
-          rest:false,
-          getString: () => '$ A 2 '
+          beat:1,
+        },
+        {
+          gString:'D',
+          fret:'3',
+          beat:1,
+        },
+        {
+          gString:'B',
+          fret:'4',
+          beat:7,
         },
         {
           gString:'A',
-          fret:'3',
-          beat:1,
-          rest:false,
-          getString: () => '$ A 3 '
+          fret:'4',
+          beat:4,
+        },
+        {
+          gString:'G',
+          fret:'2',
+          beat:4,
+        },
+        {
+          gString:'D',
+          fret:'2',
+          beat:4,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:6,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:7,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:14,
         },
     ];
-    this.generateLines()
+    this.generateLines();
   }
-  nLines(){
-      return this.lines.length;
+  generateBeatMap():Map<number, Array<NoteClass>>{
+    let arr: NoteClass[];
+    let beatMap = new Map<number, Array<NoteClass>>();
+    this.notes.sort((a, b) => (a.beat > b.beat) ? 1 : -1)
+    this.notes.forEach((note,index) => {
+      try {
+        arr = beatMap.get(note.beat)
+        arr.push(note)
+      }
+      catch(e) {
+        arr = new Array<NoteClass>()
+        arr.push(note)
+        beatMap.set(note.beat,arr)
+      } 
+    });
+    return beatMap
   }
-  generateLines(){
-    let noteArray : NoteClass[] = []
-    let line = new TabLine(this.notes);
-    // this.lines.push(line)
-  }
-  generateString(){
+  iteratebeats(map: Map<number, Array<NoteClass>>):Array<Measure>{
+    let measureArray: Measure[] = []
+    let measure = new Measure()
+    let currentBeat = 0;
 
+    let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
+    console.log("Max beats " + maximumBeats)
+
+    map.forEach((noteArray,beat) => {
+      if(beat>currentBeat){
+        for (let i = 0; i < beat-currentBeat; i++) {
+          measure.addRest()
+        }
+      }
+      currentBeat = beat;
+      if(noteArray.length==1){
+        measure.addNote(noteArray[0]);
+      }else{
+        measure.addNotes(noteArray);
+      }
+      noteArray.forEach(note => {
+        // console.log("I'm at key " + beat + " with a beat of " + note.fret);
+      });
+    });
+    measureArray.push(measure);
+    return measureArray;
+  }
+
+  generateLines(){
+    let measures: Measure[] = this.iteratebeats(this.generateBeatMap());
+    let line = new TabLine(measures);
+    this.lines.push(line)
   }
   public getLines(){
     return this.lines;
@@ -45,78 +113,52 @@ export class TabService {
 }
 
 export class TabLine{
-  measures: Measure[] = []
+  measures: Measure[];
   tablineString="";
   notes : Array<NoteClass>;
-  constructor(notes){
-    this.notes = notes;
-    this.generateMeasures()
+  constructor(measures: Measure[]){
+    this.measures = measures;
+    measures 
   }
-  generateMeasures(){
-    let measure = new Measure()
-    this.notes.forEach(note => {
-      console.log("LengthInMeasure " + note.getString());
-      measure.addtoMeasure(note);
-      // this.outputString += note.
-    });
-    // this.notes.forEach(note => {
-    //     measure.addtoMeasure(note);
-    //     if(note.fret=='|'){
-    //       console.log("I see the end of a measure..")
-    //       this.measures.push(measure)
-    //       measure = new Measure([])
-    //     }else if(note.fret=='||'){
-    //       this.measures.push(measure)
-    //       measure = new Measure([])
-    //     }
-    // });
-    this.measures.push(measure)
-  }
+
   toString():string{
-    let lineString:string = "";
+    let lineString:string = ""; 
     this.measures.forEach(measure => {
       lineString += measure.generateString()
     });
-    console.log("The line string is " + lineString)
     return lineString;
   }
-
 }
 
 export class Measure{
     notes: NoteClass[] = [];
     outputString = "";
     constructor(){}
-    addtoMeasure(note: NoteClass){
+
+    addNote(note: NoteClass){
         this.notes.push(note);
-        this.outputString += note.getString();
+        this.outputString += `$${note.gString} ${note.fret}`;  
     }
     generateString(){
-        return this.outputString;
+        return this.outputString + " |";
     }
-}
-
-export interface Note{
-    rest: boolean;
-    fret: string;
-    gString: string;
-    beat: number;
-    getString():string;
+    addNotes(notes: Array<NoteClass>){
+      notes.forEach(note => {
+        this.outputString += `$${note.gString}.${note.fret}.`
+      });
+    }
+    addRest(){
+      this.outputString += " "
+    }
 }
 
 export class NoteClass{
   fret: string;
   gString: string;
   beat: number;
-  rest: boolean
-  constructor(fret: string, gString: string, beat: number, rest: boolean){
+  constructor(fret: string, gString: string, beat: number){
     this.fret = fret;
-    this.rest = rest;
     this.beat = beat;
     this.gString = gString;
-
-  }
-  getString():string{
-    return "$"+this.gString + " " + this.fret + " ";
   }
 }
