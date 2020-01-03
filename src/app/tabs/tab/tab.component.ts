@@ -25,9 +25,10 @@ export class TabComponent implements OnInit {
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
     let tablines = this.tabService.getLines()
+    console.log("THe lines length is " + tablines.length)
     tablines.forEach((line, index) => {
       this.tab.push({
-        tab_string:line.generateString()
+        tab_string:line.toString()
       })
     });
 

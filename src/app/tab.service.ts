@@ -17,8 +17,14 @@ export class TabService {
           beat:0,
           rest:false,
           getString: () => '$ A 2 '
-        }
-     ,
+        },
+        {
+          gString:'A',
+          fret:'3',
+          beat:1,
+          rest:false,
+          getString: () => '$ A 3 '
+        },
     ];
     this.generateLines()
   }
@@ -27,8 +33,7 @@ export class TabService {
   }
   generateLines(){
     let noteArray : NoteClass[] = []
-    let line = new TabLine([this.notes[0]]);
-    console.log("Length " + this.notes[0].getString())
+    let line = new TabLine(this.notes);
     // this.lines.push(line)
   }
   generateString(){
@@ -41,18 +46,19 @@ export class TabService {
 
 export class TabLine{
   measures: Measure[] = []
-  outputString="";
+  tablineString="";
   notes : Array<NoteClass>;
   constructor(notes){
     this.notes = notes;
-    console.log("LengthInMeasure " + this.notes[0].getString())
-    this.notes.forEach(note => {
- 
-    });
     this.generateMeasures()
   }
   generateMeasures(){
-    let measure = new Measure(this.notes)
+    let measure = new Measure()
+    this.notes.forEach(note => {
+      console.log("LengthInMeasure " + note.getString());
+      measure.addtoMeasure(note);
+      // this.outputString += note.
+    });
     // this.notes.forEach(note => {
     //     measure.addtoMeasure(note);
     //     if(note.fret=='|'){
@@ -66,42 +72,27 @@ export class TabLine{
     // });
     this.measures.push(measure)
   }
-
-  generateString(){
-      this.measures.forEach(measure => {
-          this.outputString += measure.generateString();
-
-      });
-      return this.outputString;
+  toString():string{
+    let lineString:string = "";
+    this.measures.forEach(measure => {
+      lineString += measure.generateString()
+    });
+    console.log("The line string is " + lineString)
+    return lineString;
   }
+
 }
 
 export class Measure{
-    notes;
-    outputString = " ";
-    constructor(notes: Array<NoteClass>){
-      console.log("notes " + notes.length)
-
-
-        // notes.forEach(note => {
-
-        //     this.addtoMeasure(note)
-
-        // });
-
-    }
+    notes: NoteClass[] = [];
+    outputString = "";
+    constructor(){}
     addtoMeasure(note: NoteClass){
         this.notes.push(note);
-        // console.log(note.fret)
-
-
-
-    }
-    addMultipleNotes(notes: Array<Note>){
-
+        this.outputString += note.getString();
     }
     generateString(){
-        return this.outputString + '||'
+        return this.outputString;
     }
 }
 
