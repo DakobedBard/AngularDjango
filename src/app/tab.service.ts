@@ -12,30 +12,37 @@ export class TabService {
         {
           gString:'A',
           fret:'2',
-          beat:0,
-          rest:false,
-          getString: () => '$A 2 '
+          beat:1,
         },
         {
           gString:'A',
           fret:'3',
-          beat:3,
-          rest:false,
-          getString: () => '$G 3 '
+          beat:2,
         },
         {
           gString:'B',
           fret:'4',
-          beat:0,
-          rest:false,
-          getString: () => '$B 4 '
+          beat:3,
         },
         {
           gString:'A',
           fret:'4',
-          beat:1,
-          rest:false,
-          getString: () => '$D 4 '
+          beat:4,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:5,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:6,
+        },
+        {
+          gString:'A',
+          fret:'2',
+          beat:7,
         },
     ];
     this.generateLines();
@@ -59,23 +66,36 @@ export class TabService {
     });
     return beatMap
   }
-
-  iteratebeats(map: Map<number, Array<NoteClass>> ){
+  iteratebeats(map: Map<number, Array<NoteClass>>):Array<Measure>{
+    let measureArray: Measure[] = []
+    let measure = new Measure()
     console.log("I am here in iterate")
     let currentBeat = 0;
     map.forEach((noteArray,beat) => {
-      noteArray.forEach(element => {
-        console.log("I'm at key " + beat + " with a beat of " + element.fret)
+      if(beat>currentBeat){
+        for (let i = 0; i < beat-currentBeat; i++) {
+          measure.addRest()
+        }
+      }
+      currentBeat = beat;
+      if(noteArray.length==1){
+        measure.addNote(noteArray[0]);
+      }else{
+        measure.addNotes(noteArray);
+      }
+      noteArray.forEach(note => {
+        console.log("I'm at key " + beat + " with a beat of " + note.fret);
       });
     });
-
+    measureArray.push(measure)
+    console.log("The measure looks like " + measure.generateString)
+    return measureArray;
   }
 
   generateLines(){
-    let noteArray : NoteClass[] = []
-    let line = new TabLine(this.notes);
+    let measures: Measure[] = this.iteratebeats(this.generateBeatMap());
+    let line = new TabLine(measures);
     this.lines.push(line)
-    this.iteratebeats(this.generateBeatMap());
   }
   public getLines(){
     return this.lines;
@@ -83,22 +103,16 @@ export class TabService {
 }
 
 export class TabLine{
-  measures: Measure[] = []
+  measures: Measure[];
   tablineString="";
   notes : Array<NoteClass>;
-  constructor(notes){
-    this.notes = notes;
-    this.generateMeasures()
+  constructor(measures: Measure[]){
+    this.measures = measures;
+    measures 
   }
-  generateMeasures(){
-    let measure = new Measure()
-    this.notes.forEach(note => {
-      measure.addtoMeasure(note);
-    });
-    this.measures.push(measure)
-  }
+
   toString():string{
-    let lineString:string = "";
+    let lineString:string = ""; 
     this.measures.forEach(measure => {
       lineString += measure.generateString()
     });
@@ -110,45 +124,32 @@ export class Measure{
     notes: NoteClass[] = [];
     outputString = "";
     constructor(){}
-    addtoMeasure(note: NoteClass){
+
+    addNote(note: NoteClass){
         this.notes.push(note);
-        this.outputString += note.getString();
+        this.outputString += `$${note.gString} ${note.fret} `;
+        
     }
     generateString(){
         return this.outputString;
     }
+    addNotes(notes: Array<NoteClass>){
+      notes.forEach(note => {
+        this.outputString += `$${note.gString}.${note.fret}.`
+      });
+    }
+    addRest(){
+      this.outputString += " "
+    }
 }
-
-export interface Note{
-    rest: boolean;
-    fret: string;
-    gString: string;
-    beat: number;
-    getString():string;
-}
-export interface Beat{
-  eString;
-  bString;
-  gString;
-  dString;
-  aString;
-  EString;
-}
-
 
 export class NoteClass{
   fret: string;
   gString: string;
   beat: number;
-  rest: boolean
-  constructor(fret: string, gString: string, beat: number, rest: boolean){
+  constructor(fret: string, gString: string, beat: number){
     this.fret = fret;
-    this.rest = rest;
     this.beat = beat;
     this.gString = gString;
-
-  }
-  getString():string{
-    return "$"+this.gString + " " + this.fret + " ";
   }
 }
