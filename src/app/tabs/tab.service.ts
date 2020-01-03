@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class TabService {
   notes: Array<NoteClass>;
   lines : TabLine[] = [];
-  
-  constructor() { 
+  private tabsURL = 'http://localhost:8000/tabs/';
+  constructor(private http: HttpClient) { 
     this.notes = [
         {
           gString:'A',
@@ -57,6 +58,16 @@ export class TabService {
     ];
     this.generateLines();
   }
+
+  getTabs(){
+    console.log("dfdfdfdfdfdfdfdfd")
+    return this.http.get(this.tabsURL+'');
+    
+  }
+
+
+
+
   generateBeatMap():Map<number, Array<NoteClass>>{
     let arr: NoteClass[];
     let beatMap = new Map<number, Array<NoteClass>>();
