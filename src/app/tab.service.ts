@@ -4,11 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TabService {
-  notes;
-  private pointer = 0;
+  notes: Array<NoteClass>;
   lines : TabLine[] = [];
-  nlines = 0;
-  currentMeasure = 0;
+  
   constructor() { 
     this.notes = [
         {
@@ -21,23 +19,63 @@ export class TabService {
         {
           gString:'A',
           fret:'3',
+          beat:3,
+          rest:false,
+          getString: () => '$G 3 '
+        },
+        {
+          gString:'B',
+          fret:'4',
+          beat:0,
+          rest:false,
+          getString: () => '$B 4 '
+        },
+        {
+          gString:'A',
+          fret:'4',
           beat:1,
           rest:false,
-          getString: () => '$A 3 '
+          getString: () => '$D 4 '
         },
     ];
-    this.generateLines()
+    this.generateLines();
   }
-  nLines(){
-      return this.lines.length;
+  generateBeatMap():Map<number, Array<NoteClass>>{
+    let arr: NoteClass[];
+    let beatMap = new Map<number, Array<NoteClass>>();
+    this.notes.sort((a, b) => (a.beat > b.beat) ? 1 : -1)
+    console.log("Generating beat map therer are " + this.notes.length)
+    this.notes.forEach((note,index) => {
+      console.log("index:" + index)
+      try {
+        arr = beatMap.get(note.beat)
+        arr.push(note)
+      }
+      catch(e) {
+        arr = new Array<NoteClass>()
+        arr.push(note)
+        beatMap.set(note.beat,arr)
+      } 
+    });
+    return beatMap
   }
+
+  iteratebeats(map: Map<number, Array<NoteClass>> ){
+    console.log("I am here in iterate")
+    let currentBeat = 0;
+    map.forEach((noteArray,beat) => {
+      noteArray.forEach(element => {
+        console.log("I'm at key " + beat + " with a beat of " + element.fret)
+      });
+    });
+
+  }
+
   generateLines(){
     let noteArray : NoteClass[] = []
     let line = new TabLine(this.notes);
     this.lines.push(line)
-  }
-  generateString(){
-
+    this.iteratebeats(this.generateBeatMap());
   }
   public getLines(){
     return this.lines;
@@ -55,7 +93,6 @@ export class TabLine{
   generateMeasures(){
     let measure = new Measure()
     this.notes.forEach(note => {
-      console.log("LengthInMeasure " + note.getString());
       measure.addtoMeasure(note);
     });
     this.measures.push(measure)
@@ -65,10 +102,8 @@ export class TabLine{
     this.measures.forEach(measure => {
       lineString += measure.generateString()
     });
-    console.log("The line string is " + lineString)
     return lineString;
   }
-
 }
 
 export class Measure{
@@ -91,6 +126,15 @@ export interface Note{
     beat: number;
     getString():string;
 }
+export interface Beat{
+  eString;
+  bString;
+  gString;
+  dString;
+  aString;
+  EString;
+}
+
 
 export class NoteClass{
   fret: string;
