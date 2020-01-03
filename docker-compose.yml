@@ -23,6 +23,7 @@ services:
       - POSTGRES_USER=database1_role
       - POSTGRES_PASSWORD=database1_password
       - POSTGRES_DB=database1
+    container_name: db
 
 #  rabbitmq:
 #    image: rabbitmq:3.7-alpine
