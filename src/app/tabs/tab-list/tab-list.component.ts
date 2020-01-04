@@ -7,7 +7,7 @@ import { TabService } from '../tab.service'
 })
 export class TabListComponent implements OnInit {
   tabService: TabService
-  tabs;
+  tabs: any[] = [];
   constructor(tabService: TabService) { 
     this.tabService = tabService;
   }
@@ -32,9 +32,11 @@ export class TabListComponent implements OnInit {
       }
     );
   }
-  
   ngOnInit() {
     this.getTabs()
+  }
+  tabDetail(){
+    console.log("Tab detail")
   }
 
 }
