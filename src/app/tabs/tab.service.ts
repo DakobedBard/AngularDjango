@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { MessageService } from '../message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,9 @@ import { Observable, Subject } from 'rxjs';
 export class TabService {
   notes: Array<NoteClass>;
   lines : TabLine[] = [];
-  messages: string[] = [];
+  messages: string[] = ["first Tab Messsage"];
   private tabsURL = 'http://localhost:8000/tabs/';
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private messageService: MessageService) { 
     this.notes = [
         {
           gString:'A',
@@ -118,11 +119,10 @@ export class TabService {
   public getLines(){
     return this.lines;
   }
-
   add(message: string) {
-    this.messages.push(message);
+    this.messageService.add(message);
+    this.messages.push(message)
   }
-
   clear() {
     this.messages = [];
   }
