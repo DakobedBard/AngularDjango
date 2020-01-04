@@ -10,14 +10,17 @@
 
 </head>
 <mat-grid-list cols="2" rowHeight="2:1" gutterSize="3px">
-  <mat-grid-tile rowspan="2">
+  <mat-grid-tile>
     <app-document-list></app-document-list>
-    <app-upload></app-upload>    
+    <app-upload></app-upload>
   </mat-grid-tile   >
   <mat-grid-tile rowspan="2">
     <app-tab-panel></app-tab-panel>
   </mat-grid-tile>
-
+  <mat-grid-tile>
+    <app-tab-list></app-tab-list>    
+    
+  </mat-grid-tile>  
 </mat-grid-list>
 
 <app-document-search></app-document-search>
