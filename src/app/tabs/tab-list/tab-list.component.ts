@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { TabService } from '../tab.service'
+import { TabService, NoteClass } from '../tab.service'
+import { MessageService } from '../../message.service'
 @Component({
   selector: 'app-tab-list',
   templateUrl: './tab-list.component.html',
   styleUrls: ['./tab-list.component.css']
 })
 export class TabListComponent implements OnInit {
-
   tabs: any[] = [];
-  constructor(private tabService: TabService) { 
+  constructor(private tabService: TabService, private messageService: MessageService) { 
   }
-
   getTabs(){
     this.tabService.getTabs().subscribe(
       (data) => {
@@ -30,7 +29,15 @@ export class TabListComponent implements OnInit {
     this.getTabs()
   }
   tabDetail(){
-    console.log("Tab detail")
+    this.messageService.add("second message..")
+    
+    // console.log("Tab detail")
+    // let notesArray : Array<NoteClass> = []
+    // this.tabs[0].notes.forEach(note => {
+    //   notesArray.push(new NoteClass(note.fret,note.gString,note.beat))
+    // });
+    // this.tabService.setNotes(this.tabs[0].notes)
+
   }
 
 }

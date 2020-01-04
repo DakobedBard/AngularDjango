@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TabLine }from '../tab.service'
 import { TabService } from '../tab.service'
+import { Subscription } from 'rxjs';
+import { MessageService } from '../../message.service'
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
@@ -8,18 +10,15 @@ import { TabService } from '../tab.service'
 })
 export class TabComponent implements OnInit {
   tab;
-  chords
+  messages: any[] = [];
   measuresPerLine =5;
   linesPerPage = 8;
   totalMeasures;
   notevalue = 4
   beatsPerBar = 4;
   tablines: TabLine[];
-
-  tabs: any = []
-
-  constructor(private tabService: TabService) { 
-
+  tabs: any = [];
+  constructor(private tabService: TabService, private messageService: MessageService) { 
   }
 
   getTabs(){
@@ -43,11 +42,9 @@ export class TabComponent implements OnInit {
       }
     );
   
-
   }
 
   ngOnInit() {
-
     this.tab  = [
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
@@ -58,10 +55,12 @@ export class TabComponent implements OnInit {
         tab_string:line.toString()
       })
     });
-    this.getTabs()
+    // this.getTabs()
 
   };
-
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+}
 
 
 }
