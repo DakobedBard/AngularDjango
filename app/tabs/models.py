@@ -10,6 +10,4 @@ class Note():
 class GuitarTab(models.Model):
     name = models.CharField(max_length=30, default="firstTab.txt")
     notes = ArrayField(JSONField(default=list), null=True)
-    def __init__(self, name, notes):
-        self.name = name
-        self.notes = notes
+

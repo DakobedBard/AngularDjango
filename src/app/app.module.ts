@@ -23,7 +23,8 @@ import { HowlComponent } from './howl/howl.component';
 import { UploadComponent } from './documents/upload/upload.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { ChordLineComponent } from './tabs/chord-line/chord-line.component';
-import { TabPanelComponent } from './tabs/tab-panel/tab-panel.component'
+import { TabPanelComponent } from './tabs/tab-panel/tab-panel.component';
+import { TabListComponent } from './tabs/tab-list/tab-list.component'
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { TabPanelComponent } from './tabs/tab-panel/tab-panel.component'
     DocumentListComponent,
     ChordLineComponent,
     TabPanelComponent,
+    TabListComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

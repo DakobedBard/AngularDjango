@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TabLine }from '../tab.service'
 import { TabService } from '../tab.service'
+import { Subscription } from 'rxjs';
+import { MessageService } from '../../message.service'
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
@@ -8,46 +10,57 @@ import { TabService } from '../tab.service'
 })
 export class TabComponent implements OnInit {
   tab;
-  chords
+  messages: any[] = [];
   measuresPerLine =5;
   linesPerPage = 8;
   totalMeasures;
   notevalue = 4
   beatsPerBar = 4;
   tablines: TabLine[];
-  tabService: TabService
-  constructor(tabService: TabService) { 
-    this.tabService = tabService;
+  tabs: any = [];
+  constructor(private tabService: TabService, private messageService: MessageService) { 
   }
 
   getTabs(){
-    this.tabService.getTabs()
+    console.log("dfdfdf  ")
     this.tabService.getTabs().subscribe(
-      (res) => {
-        console.log(res)
+      (data) => {
+      console.log("The data is ! " + data)
+      for (const tab of (data as any)) {
+        this.tabs.push({
+          notes: tab.notes,
+          name:tab.name
+        });
+      }
+      console.log("why")
+      this.tabs.forEach(tab => {
+        console.log("first tab is " + tab.name)
+      });
       },
       (err) => {  
         console.log(err);
       }
     );
+  
   }
 
   ngOnInit() {
-
     this.tab  = [
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
     let tablines = this.tabService.getLines()
     tablines.forEach((line, index) => {
-      console.log("The line looks like " + line.toString())
+
       this.tab.push({
         tab_string:line.toString()
       })
     });
-    this.getTabs()
+    // this.getTabs()
 
   };
-
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+}
 
 
 }

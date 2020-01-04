@@ -10,5 +10,10 @@
       </app-tab-line>
     </mat-list-item>
   </mat-list>
+  <h1>Messages</h1>
+  <div *ngFor='let message of messageService.messages'> {{message}} </div>
 
 </mat-card>
+
+
+

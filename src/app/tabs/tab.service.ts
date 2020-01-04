@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class TabService {
   notes: Array<NoteClass>;
   lines : TabLine[] = [];
+  messages: string[] = [];
   private tabsURL = 'http://localhost:8000/tabs/';
   constructor(private http: HttpClient) { 
     this.notes = [
@@ -59,15 +61,15 @@ export class TabService {
     this.generateLines();
   }
 
-  getTabs(){
-    console.log("dfdfdfdfdfdfdfdfd")
-    return this.http.get(this.tabsURL+'');
-    
+  setNotes(notes:Array<NoteClass>){
+    this.notes = notes;
+    this.generateLines()
   }
 
 
-
-
+  getTabs(){
+    return this.http.get(this.tabsURL+'');
+  }
   generateBeatMap():Map<number, Array<NoteClass>>{
     let arr: NoteClass[];
     let beatMap = new Map<number, Array<NoteClass>>();
@@ -121,7 +123,21 @@ export class TabService {
   public getLines(){
     return this.lines;
   }
+
+  add(message: string) {
+    this.messages.push(message);
+    console.log("add");
+    this.messages.forEach(message => {
+      console.log("message " + message)
+    });
+  }
+
+
 }
+
+
+
+
 
 export class TabLine{
   measures: Measure[];
