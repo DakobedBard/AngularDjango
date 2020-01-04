@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TabLine }from '../tab.service'
+import { TabLine }from '../tab'
 import { TabService } from '../tab.service'
 import { Subscription } from 'rxjs';
 import { MessageService } from '../../message.service'
@@ -48,7 +48,7 @@ export class TabComponent implements OnInit {
     this.tab  = [
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
-    let tablines = this.tabService.getLines()
+    let tablines = this.tabService.getTab().getLines()
     tablines.forEach((line, index) => {
 
       this.tab.push({
