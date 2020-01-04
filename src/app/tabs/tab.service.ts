@@ -66,7 +66,6 @@ export class TabService {
     this.generateLines()
   }
 
-
   getTabs(){
     return this.http.get(this.tabsURL+'');
   }
@@ -91,7 +90,6 @@ export class TabService {
     let measureArray: Measure[] = []
     let measure = new Measure()
     let currentBeat = 0;
-
     let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
     console.log("Max beats " + maximumBeats)
 
@@ -107,9 +105,6 @@ export class TabService {
       }else{
         measure.addNotes(noteArray);
       }
-      noteArray.forEach(note => {
-        // console.log("I'm at key " + beat + " with a beat of " + note.fret);
-      });
     });
     measureArray.push(measure);
     return measureArray;
@@ -126,12 +121,11 @@ export class TabService {
 
   add(message: string) {
     this.messages.push(message);
-    console.log("add");
-    this.messages.forEach(message => {
-      console.log("message " + message)
-    });
   }
 
+  clear() {
+    this.messages = [];
+  }
 
 }
 
