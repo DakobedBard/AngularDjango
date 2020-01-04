@@ -31,13 +31,6 @@ export class TabListComponent implements OnInit {
   tabDetail(){
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
-    // console.log("Tab detail")
-    // let notesArray : Array<NoteClass> = []
-    // this.tabs[0].notes.forEach(note => {
-    //   notesArray.push(new NoteClass(note.fret,note.gString,note.beat))
-    // });
-    // this.tabService.setNotes(this.tabs[0].notes)
-
   }
 
 }

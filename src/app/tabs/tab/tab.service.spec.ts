@@ -4,6 +4,9 @@ import { TabService } from '../tab.service';
 
 describe('TabService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
+  TestBed.configureTestingModule({
+    providers: [TabService]
+  });
 
   it('should be created', () => {
     const service: TabService = TestBed.get(TabService);

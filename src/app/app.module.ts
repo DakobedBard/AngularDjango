@@ -34,10 +34,6 @@ import { TabListComponent } from './tabs/tab-list/tab-list.component'
     BrowserAnimationsModule,  
     MaterialModule,
     ReactiveFormsModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-
     BrowserAnimationsModule
   ],
   declarations: [
