@@ -16,20 +16,35 @@ export class TabComponent implements OnInit {
   beatsPerBar = 4;
   tablines: TabLine[];
   tabService: TabService
+
+  tabs: any = []
+
   constructor(tabService: TabService) { 
     this.tabService = tabService;
   }
 
   getTabs(){
-    this.tabService.getTabs()
+    console.log("dfdfdf  ")
     this.tabService.getTabs().subscribe(
-      (res) => {
-        console.log(res)
+      (data) => {
+      console.log("The data is ! " + data)
+      for (const tab of (data as any)) {
+        this.tabs.push({
+          notes: tab.notes,
+          name:tab.name
+        });
+      }
+      console.log("why")
+      this.tabs.forEach(tab => {
+        console.log("first tab is " + tab.name)
+      });
       },
       (err) => {  
         console.log(err);
       }
     );
+  
+
   }
 
   ngOnInit() {
@@ -39,7 +54,7 @@ export class TabComponent implements OnInit {
     ];
     let tablines = this.tabService.getLines()
     tablines.forEach((line, index) => {
-      console.log("The line looks like " + line.toString())
+
       this.tab.push({
         tab_string:line.toString()
       })

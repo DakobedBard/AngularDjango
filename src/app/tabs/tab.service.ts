@@ -60,14 +60,8 @@ export class TabService {
   }
 
   getTabs(){
-    console.log("dfdfdfdfdfdfdfdfd")
     return this.http.get(this.tabsURL+'');
-    
   }
-
-
-
-
   generateBeatMap():Map<number, Array<NoteClass>>{
     let arr: NoteClass[];
     let beatMap = new Map<number, Array<NoteClass>>();
