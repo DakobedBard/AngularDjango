@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-
+from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
 class Note():
     gString = models.CharField(blank=False, null=False)
     fret = models.CharField(blank=False, null=False),
@@ -8,8 +9,7 @@ class Note():
 
 class GuitarTab(models.Model):
     name = models.CharField(max_length=30, default="firstTab.txt")
-
-
-
-
-
+    notes = ArrayField(JSONField(default=list), null=True)
+    def __init__(self, name, notes):
+        self.name = name
+        self.notes = notes
