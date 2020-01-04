@@ -6,26 +6,20 @@ import { TabService } from '../tab.service'
   styleUrls: ['./tab-list.component.css']
 })
 export class TabListComponent implements OnInit {
-  tabService: TabService
+
   tabs: any[] = [];
-  constructor(tabService: TabService) { 
-    this.tabService = tabService;
+  constructor(private tabService: TabService) { 
   }
 
   getTabs(){
     this.tabService.getTabs().subscribe(
       (data) => {
-      console.log("The data is ! " + data)
       for (const tab of (data as any)) {
         this.tabs.push({
           notes: tab.notes,
           name:tab.name
         });
       }
-      console.log("why")
-      this.tabs.forEach(tab => {
-        console.log("first tab is " + tab.name)
-      });
       },
       (err) => {  
         console.log(err);

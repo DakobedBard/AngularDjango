@@ -15,12 +15,11 @@ export class TabComponent implements OnInit {
   notevalue = 4
   beatsPerBar = 4;
   tablines: TabLine[];
-  tabService: TabService
 
   tabs: any = []
 
-  constructor(tabService: TabService) { 
-    this.tabService = tabService;
+  constructor(private tabService: TabService) { 
+
   }
 
   getTabs(){
