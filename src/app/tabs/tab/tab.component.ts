@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TabLine }from '../tab'
 import { TabService } from '../tab.service'
 import { Subscription } from 'rxjs';
 import { MessageService } from '../../message.service'
+import { Tab, TabLine } from '../tab'
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
@@ -22,7 +22,6 @@ export class TabComponent implements OnInit {
   }
 
   getTabs(){
-    console.log("dfdfdf  ")
     this.tabService.getTabs().subscribe(
       (data) => {
       console.log("The data is ! " + data)
@@ -41,7 +40,6 @@ export class TabComponent implements OnInit {
         console.log(err);
       }
     );
-  
   }
 
   ngOnInit() {
@@ -55,12 +53,9 @@ export class TabComponent implements OnInit {
         tab_string:line.toString()
       })
     });
-    // this.getTabs()
+    jtab.render($('#mytab'),'Am7 C');
+    this.getTabs()
 
   };
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-}
-
 
 }

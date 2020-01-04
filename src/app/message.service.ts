@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { NoteClass } from './tabs/tab'
+import { Tab, TabLine } from './tabs/tab'
 @Injectable({ providedIn: 'root' })
 export class MessageService {
   messages: string[] = [];
-  tabs: Array<Tab> = []
+  tab = [];
+  lines: Array<TabLine> = [];
   constructor(){}
   add(message: string) {
     this.messages.push(message);
   }
+  addTab(tab: Tab){
+    let tabLines: Array<TabLine> = tab.getLines()
+    tabLines.forEach(line => {
+      this.tab.push({tab_string:line.toString()})
+      console.log("I am being added to the message..")
+    });
+  }
   clear() {
     this.messages = [];
   }
-  sendTab(name:string, notes:Array<NoteClass>){
-    this.messages.push(name)
-    let tab:Tab = new Tab(name, notes)
-    this.tabs.push(tab)
-  }
-}
-export class Tab{
-  constructor(public name:string, public notes: Array<NoteClass>){}
+
 }

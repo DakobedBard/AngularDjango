@@ -17,14 +17,25 @@
           (click)="messageService.clear()">clear</button>
   <div *ngFor='let message of messageService.messages'> {{message}} </div>
 </div>
-<div *ngIf="tabService.messages.length">
-  <h2>Tabs</h2>
-  <button class="clear"
-          (click)="tabService.clear()">clear</button>
-  <div *ngFor='let message of tabService.messages'> {{message}} </div>
-</div>
-Length of tabService.messages {{tabService.messages.length}}
 
+
+
+<mat-list-item  *ngFor="let line of messageService.tab" style="padding-top: 15px;
+padding-right: 30px;
+padding-bottom: 50px;
+padding-left: 4px;">
+<app-tab-line [tab_string]= line.tab_string matLine> </app-tab-line>
+</mat-list-item>
+dfdf
+<div id="mytab"></div>
+<script type="text/javascript">
+    jtab.render($('#mytab'),'Am7 C');
+</script>
+    <script type="text/javascript">
+      console.log("Is this happening.. " )
+      jtab.renderimplicit();
+      </script>
+  
 </mat-card>
 
 
