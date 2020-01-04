@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TabLine }from '../../tab.service'
-import { TabService } from '../../tab.service'
+import { TabLine }from '../tab.service'
+import { TabService } from '../tab.service'
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
@@ -17,8 +17,21 @@ export class TabComponent implements OnInit {
   tablines: TabLine[];
   tabService: TabService
   constructor(tabService: TabService) { 
-    this.tabService = new TabService();
+    this.tabService = tabService;
   }
+
+  getTabs(){
+    this.tabService.getTabs()
+    this.tabService.getTabs().subscribe(
+      (res) => {
+        console.log(res)
+      },
+      (err) => {  
+        console.log(err);
+      }
+    );
+  }
+
   ngOnInit() {
 
     this.tab  = [
@@ -31,6 +44,7 @@ export class TabComponent implements OnInit {
         tab_string:line.toString()
       })
     });
+    this.getTabs()
 
   };
 
