@@ -30,12 +30,9 @@ class TabDetailView(APIView):
             return Response({"error": "Given Tab object not found."}, status=404)
 
 
-class TabListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+class TabListAPIView(generics.ListAPIView):
     serializer_class = TabSerializer
     # permission_classes = [IsAuthenticated]
     def get_queryset(self):
-        qs = GuitarTab.objects.all()
-        query = self.request.GET.get("q")
-        if query is not None:
-            qs = qs.filter(Q(title__icontains=query))
-        return qs
+        tabs = GuitarTab.objects.all()
+        return tabs
