@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 declare const jtab: any;
+import { Tab } from '../tab'
 @Component({
   selector: 'app-tab-line',
   templateUrl: './tab-line.component.html',

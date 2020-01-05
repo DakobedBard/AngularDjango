@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tab, TabLine } from './tabs/tab'
+import { TabService } from './tabs/tab.service';
 @Injectable({ providedIn: 'root' })
 export class MessageService {
   messages: string[] = [];

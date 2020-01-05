@@ -5,6 +5,12 @@ export class Tab{
     constructor(private name:string,private notes: Array<NoteClass>){
         this.generateLines()
     }
+    getName():string{
+      return this.name
+    }
+    getNotes():Array<NoteClass>{
+      return this.notes;
+    }
 
     setNotes(notes:Array<NoteClass>){
         this.notes = notes;

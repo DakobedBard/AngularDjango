@@ -1,7 +1,7 @@
 <link type="text/css" rel="stylesheet" href="http://jtab.tardate.com/css/jtab-helper.css"/>
 
 <mat-card>
-  <mat-list style="padding-top: 135px; ">
+  <!-- <mat-list style="padding-top: 135px; ">
     <mat-list-item  *ngFor="let line of tab" style="padding-top: 15px;
       padding-right: 30px;
       padding-bottom: 50px;
@@ -9,7 +9,7 @@
       <app-tab-line [tab_string]= line.tab_string matLine>
       </app-tab-line>
     </mat-list-item>
-  </mat-list>
+  </mat-list> -->
 
   <div *ngIf="messageService.messages.length">
   <h2>Messages</h2>
@@ -17,25 +17,12 @@
           (click)="messageService.clear()">clear</button>
   <div *ngFor='let message of messageService.messages'> {{message}} </div>
 </div>
-
-
-
-<mat-list-item  *ngFor="let line of messageService.tab" style="padding-top: 15px;
-padding-right: 30px;
-padding-bottom: 50px;
-padding-left: 4px;">
-<app-tab-line [tab_string]= line.tab_string matLine> </app-tab-line>
+<!-- {{ guitarTab.name }} tab Name -->
+<mat-list-item  *ngFor="let line of messageService.tab" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
+  <app-tab-line [tab_string]= line.tab_string matLine> </app-tab-line>
 </mat-list-item>
-dfdf
 <div id="mytab"></div>
-<script type="text/javascript">
-    jtab.render($('#mytab'),'Am7 C');
-</script>
-    <script type="text/javascript">
-      console.log("Is this happening.. " )
-      jtab.renderimplicit();
-      </script>
-  
+
 </mat-card>
 
 

@@ -6,28 +6,56 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router'
 
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-
-
+import { TabService } from '../tabs/tab.service';
+import { Tab } from '../tabs/tab'
+ 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-
+  tabs: any[] = [];
+  guitarTabs: Array<Tab> = []
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private tabService: TabService
     ) { }
-
     refresh(): void{
 
     }
-
-    ngOnInit() {
-      
+    getTabs(){
+      this.tabService.getTabs().subscribe(
+        (data) => {
+          for (const tab of (data as any)) {
+            this.tabs.push({
+              notes: tab.notes,
+              name:tab.name
+            });
+          }
+        },
+        (err) => {  
+          console.log(err);
+        }
+      );
     }
+    getTab(){
+      return this.guitarTabs[0];
+    }
+    ngOnInit() {
+      this.getTabs()
+      this.generateTabArray();
+    }
+    generateTabArray(){
+      let tablature: Tab;
+      this.tabs.forEach(tab => {
+        tablature = new Tab(tab.name, tab.notes);
+        this.guitarTabs.push(tablature)
+      });
 
+      // this.getTab()
+    }
 
 }

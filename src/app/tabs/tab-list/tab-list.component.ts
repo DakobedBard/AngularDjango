@@ -32,7 +32,7 @@ export class TabListComponent implements OnInit {
   tabDetail(){
   
     let noteArray:Array<NoteClass> = []
-    this.tabs[0].notes.forEach(note => {
+    this.tabs[1].notes.forEach(note => {
       noteArray.push(note)
     });
     let tab: Tab = new Tab("First Tab",noteArray )

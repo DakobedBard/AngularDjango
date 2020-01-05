@@ -13,9 +13,23 @@
   <mat-grid-tile>
     <app-document-list></app-document-list>
     <app-upload></app-upload>
+
+<div style="padding: 50px; width:400px;">
+  <mat-card >
+    <mat-card-title>Tabs</mat-card-title>
+    <mat-card-content>
+      <mat-list>   
+        <mat-list-item *ngFor="let tab of tabs">
+          <button (click)=tabDetail() target="_blank">{{tab.name}}</button>
+        </mat-list-item>
+ 
+      </mat-list>  
+    </mat-card-content>
+  </mat-card >
+</div>
   </mat-grid-tile   >
   <mat-grid-tile rowspan="2">
-    <app-tab-panel></app-tab-panel>
+    <app-tab [guitarTab]="getTab()"></app-tab>
   </mat-grid-tile>
   <mat-grid-tile>
     <app-tab-list></app-tab-list>    
