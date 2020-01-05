@@ -4,6 +4,7 @@
 
 <h1 style="text-align: center;">{{ messageService.tabName}} </h1>
 
+<h1 style="text-align: center;">{{ messageService.tabID}} </h1>
 <!-- <mat-list-item  *ngFor="let str of strs" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
   <app-tab-line [tab_string]= str matLine> </app-tab-line>
 </mat-list-item> -->
@@ -11,6 +12,8 @@
 <mat-list-item  *ngFor="let line of messageService.strs" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
   <app-tab-line [tab_string]= line matLine> </app-tab-line>
 </mat-list-item>
+
+<button type="submit" (click)=deleteTab(messageService.tabID)>Delete Tab</button>
 
 </mat-card>
 

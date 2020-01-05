@@ -22,7 +22,7 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile>
-    <div *ngIf="guitarTabs.length > 0">
+    <div *ngIf="guitarTabs.length > 0 &&  !createTabMode">
       <app-tab-list [guitarTabs] = guitarTabs></app-tab-list>  
     </div>
       

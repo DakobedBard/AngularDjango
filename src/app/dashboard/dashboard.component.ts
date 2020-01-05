@@ -18,6 +18,7 @@ import { MessageService } from '../message.service'
 export class DashboardComponent implements OnInit {
   tabs: any[];
   guitarTabs: Array<Tab>;
+  createTabMode: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -46,7 +47,7 @@ export class DashboardComponent implements OnInit {
     }
 
     postTab(){
-      
+
     }
 
     ngOnInit() {

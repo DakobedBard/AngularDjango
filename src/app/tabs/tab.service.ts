@@ -21,6 +21,9 @@ export class TabService {
     return this.http.post(this.tabsURL+'create/', tab)
   }
 
+  deleteTab(id:number){
+    return this.http.delete(this.tabsURL+id+"/delete/")
+  }
   add(message: string) {
     this.messageService.add(message);
     this.messages.push(message)

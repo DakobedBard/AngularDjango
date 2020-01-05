@@ -37,7 +37,6 @@ export class TabListComponent implements OnInit {
     this.getTabs()
   }
   tabDetail(index:number){
-    console.log("THE INDEX IS " + index);
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
     this.messageService.setTab(this.guitarTabs[index])

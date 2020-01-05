@@ -9,6 +9,7 @@ export class MessageService {
   tablines: TabLine[];
   strs: Array<string>;
   notes: Array<NoteClass> = []
+  tabID: number;
   constructor(){}
   add(message: string) {
     this.messages.push(message);
@@ -18,7 +19,7 @@ export class MessageService {
     this.strs = tab.strs;
     this.guitarTab = tab;
     this.tabName = tab.name;
-
+    this.tabID = tab.id;
   }
   getTab():Tab{
     return this.guitarTab; 

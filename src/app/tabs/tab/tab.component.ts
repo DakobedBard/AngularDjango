@@ -16,11 +16,22 @@ export class TabComponent implements OnInit {
   tablines: TabLine[];
   strs: Array<string>;
   tabs: any = [];
-  constructor(private messageService: MessageService) { 
+  constructor(private messageService: MessageService, private tabService: TabService) { 
   }
-
+  deleteTab(id:number){
+    this.tabService.deleteTab(id).subscribe(
+      (data) => {
+        console.log("The item was deleted..")
+      },
+      (err) => {  
+        console.log(err);
+      }
+    )
+  }
 
   ngOnInit() {
 
   }
 }
+
+
