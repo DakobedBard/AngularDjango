@@ -37,11 +37,21 @@ export class TabListComponent implements OnInit {
     this.getTabs()
   }
   tabDetail(index:number){
-    console.log("THE INDEX IS " + index);
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
     this.messageService.setTab(this.guitarTabs[index])
-    
+    this.messageService.setEditMode(false);
   }
-
+ createTab(){
+   this.messageService.setEditMode(true);
+    // let tab: Tab = new Tab("Tab Create from UI", [new NoteClass('2','G',1), new NoteClass('3','G',3)], 1);
+    // this.tabService.postTab(tab).subscribe(
+    //   (data) => {
+    //     console.log("The data is " + data)
+    //   },
+    //   (err) => {  
+    //     console.log(err);
+    //   }
+    // )
+  }
 }

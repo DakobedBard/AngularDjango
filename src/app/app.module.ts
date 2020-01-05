@@ -23,7 +23,8 @@ import { UploadComponent } from './documents/upload/upload.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { ChordLineComponent } from './tabs/chord-line/chord-line.component';
 import { TabPanelComponent } from './tabs/tab-panel/tab-panel.component';
-import { TabListComponent } from './tabs/tab-list/tab-list.component'
+import { TabListComponent } from './tabs/tab-list/tab-list.component';
+import { TabCreateComponent } from './tabs/tab-create/tab-create.component'
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { TabListComponent } from './tabs/tab-list/tab-list.component'
     ChordLineComponent,
     TabPanelComponent,
     TabListComponent,
+    TabCreateComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

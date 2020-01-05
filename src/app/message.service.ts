@@ -9,6 +9,10 @@ export class MessageService {
   tablines: TabLine[];
   strs: Array<string>;
   notes: Array<NoteClass> = []
+  tabID: number;
+
+  editTabMode: boolean = false;
+
   constructor(){}
   add(message: string) {
     this.messages.push(message);
@@ -18,12 +22,18 @@ export class MessageService {
     this.strs = tab.strs;
     this.guitarTab = tab;
     this.tabName = tab.name;
-
+    this.tabID = tab.id;
   }
   getTab():Tab{
     return this.guitarTab; 
   }
   clear() {
     this.messages = [];
+  }
+  setEditMode(edit:boolean){
+    this.editTabMode = edit;
+  }
+  getEditMode():boolean{
+    return this.editTabMode;
   }
 }

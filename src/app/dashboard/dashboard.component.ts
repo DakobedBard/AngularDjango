@@ -18,6 +18,7 @@ import { MessageService } from '../message.service'
 export class DashboardComponent implements OnInit {
   tabs: any[];
   guitarTabs: Array<Tab>;
+  createTabMode: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -32,9 +33,7 @@ export class DashboardComponent implements OnInit {
         (data) => {
           for (const tab of (data as any)) {
             this.guitarTabs.push(new Tab(tab.name, tab.notes, tab.id))
-
           }
-          let tab1: Tab = this.tabs[0];
           this.messageService.setTab(this.guitarTabs[0])
         },
         (err) => {  
@@ -44,10 +43,13 @@ export class DashboardComponent implements OnInit {
     }
 
     getTab(){
-      console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
-      // this.messageService.setTab(this.guitarTabs[0])
       return this.guitarTabs[0];
     }
+
+    postTab(){
+
+    }
+
     ngOnInit() {
       this.getTabs()
       
