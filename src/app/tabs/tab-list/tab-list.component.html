@@ -5,8 +5,8 @@
       <mat-card-title>Tabs</mat-card-title>
       <mat-card-content>
         <mat-list>   
-          <mat-list-item *ngFor="let tab of tabs">
-            <button (click)=tabDetail() target="_blank">{{tab.name}}</button>
+          <mat-list-item *ngFor="let tab of tabNames; index as i" >
+            <button (click)=tabDetail(i) target="_blank">{{tab }} {{ i }} </button>
           </mat-list-item>
    
         </mat-list>  

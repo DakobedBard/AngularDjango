@@ -8,7 +8,8 @@ import { MessageService } from '../../message.service'
   styleUrls: ['./tab-list.component.css']
 })
 export class TabListComponent implements OnInit {
-  @Input() guitarTab: Array<string>;
+  @Input() guitarTabs: Array<Tab>;
+  tabNames: Array<string>;
   tabs: any[] = [];
   constructor(private tabService: TabService, private messageService: MessageService) { 
   }
@@ -28,18 +29,18 @@ export class TabListComponent implements OnInit {
     );
   }
   ngOnInit() {
+    console.log("The number of tabs is " + this.guitarTabs.length)
+    this.tabNames = []
+    this.guitarTabs.forEach(tab => {
+      this.tabNames.push(tab.name);
+    });
     this.getTabs()
   }
-  tabDetail(){
-  
-    let noteArray:Array<NoteClass> = []
-    this.tabs[1].notes.forEach(note => {
-      noteArray.push(note)
-    });
-    let tab: Tab = new Tab("First Tab",noteArray, 1 )
+  tabDetail(index:number){
+    console.log("THE INDEX IS " + index);
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
-    this.messageService.setTab(tab)
+    this.messageService.setTab(this.guitarTabs[index])
     
   }
 

@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
+
     getTab(){
       console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
       // this.messageService.setTab(this.guitarTabs[0])
