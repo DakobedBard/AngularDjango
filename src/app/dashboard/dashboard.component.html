@@ -16,16 +16,18 @@
 
   </mat-grid-tile   >
   <mat-grid-tile rowspan="2">
-    <div *ngIf="guitarTabs.length > 0  && messageService.guitarTab">
-      <app-tab [guitarTab]=getTab()>
-      </app-tab>
+    <div *ngIf="guitarTabs.length > 0  && !messageService.getEditMode()">
+      <app-tab [guitarTab]=getTab()></app-tab>
+    </div>
+    <div *ngIf="messageService.getEditMode()">
+      <app-tab-create></app-tab-create>
     </div>
   </mat-grid-tile>
   <mat-grid-tile>
-    <div *ngIf="guitarTabs.length > 0 &&  !createTabMode">
+    <div *ngIf="guitarTabs.length > 0">
       <app-tab-list [guitarTabs] = guitarTabs></app-tab-list>  
     </div>
-      
+
   </mat-grid-tile>  
 </mat-grid-list>
 
