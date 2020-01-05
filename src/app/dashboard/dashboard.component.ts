@@ -31,14 +31,11 @@ export class DashboardComponent implements OnInit {
       this.tabService.getTabs().subscribe(
         (data) => {
           for (const tab of (data as any)) {
-            this.guitarTabs.push(new Tab(tab.name, tab.notes))
-            this.tabs.push({
-              notes: tab.notes,
-              name:tab.name
-            });
+            this.guitarTabs.push(new Tab(tab.name, tab.notes, tab.id))
+
           }
           let tab1: Tab = this.tabs[0];
-          this.messageService.setTab(this.tabs[0])
+          this.messageService.setTab(this.guitarTabs[0])
         },
         (err) => {  
           console.log(err);

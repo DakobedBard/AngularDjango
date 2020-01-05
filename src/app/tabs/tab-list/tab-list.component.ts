@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TabService } from '../tab.service'
 import { NoteClass, Tab } from '../tab'
 import { MessageService } from '../../message.service'
@@ -8,6 +8,7 @@ import { MessageService } from '../../message.service'
   styleUrls: ['./tab-list.component.css']
 })
 export class TabListComponent implements OnInit {
+  @Input() guitarTab: Array<string>;
   tabs: any[] = [];
   constructor(private tabService: TabService, private messageService: MessageService) { 
   }
@@ -35,7 +36,7 @@ export class TabListComponent implements OnInit {
     this.tabs[1].notes.forEach(note => {
       noteArray.push(note)
     });
-    let tab: Tab = new Tab("First Tab",noteArray )
+    let tab: Tab = new Tab("First Tab",noteArray, 1 )
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
     this.messageService.setTab(tab)

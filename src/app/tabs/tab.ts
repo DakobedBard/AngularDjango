@@ -1,7 +1,7 @@
 export class Tab{
     lines : TabLine[] = [];
     strs : Array<string>;
-    constructor(public name:string,public notes: Array<NoteClass>){
+    constructor(public name:string,public notes: Array<NoteClass>, public id:number){
         this.strs = []
         this.generateLines()
         this.generateStrings()

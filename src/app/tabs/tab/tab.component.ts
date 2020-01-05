@@ -21,25 +21,6 @@ export class TabComponent implements OnInit {
 
 
   ngOnInit() {
-    this.tab  = [
-      {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
-    ];
-    
-    let tab: Tab = this.messageService.getTab()
-    if(tab){
 
-
-    }else{
-      console.log("No")
-    }
-
-    // tablines.forEach((line, index) => {
-    //   this.tab.push({
-    //     tab_string:line.toString()
-    //   })
-    // });
-
-
-  };
-
+  }
 }
