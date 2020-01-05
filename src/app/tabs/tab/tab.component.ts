@@ -3,6 +3,7 @@ import { TabService } from '../tab.service'
 import { Subscription } from 'rxjs';
 import { MessageService } from '../../message.service'
 import { Tab, TabLine } from '../tab'
+declare const jtab: any;
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
@@ -54,6 +55,7 @@ export class TabComponent implements OnInit {
       })
     });
     jtab.render($('#mytab'),'Am7 C');
+
     this.getTabs()
 
   };
