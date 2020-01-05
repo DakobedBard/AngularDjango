@@ -10,7 +10,6 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { DocumentDetailComponent }  from './document-detail/document-detail.component';
 
 import { DocumentSearchComponent }  from './document-search/document-search.component';
-import { MessagesComponent }    from './messages/messages.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
@@ -35,17 +34,12 @@ import { TabListComponent } from './tabs/tab-list/tab-list.component'
     BrowserAnimationsModule,  
     MaterialModule,
     ReactiveFormsModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-
     BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
     DocumentDetailComponent,
-    MessagesComponent,
     DocumentSearchComponent,
     LoginComponent,
     TabComponent,
