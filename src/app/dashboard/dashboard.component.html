@@ -29,7 +29,7 @@
 </div>
   </mat-grid-tile   >
   <mat-grid-tile rowspan="2">
-    <app-tab [guitarTab]="getTab()"></app-tab>
+    <div *ngIf="guitarTabs.length > 0"><app-tab [guitarTab]=getTab()></app-tab></div>
   </mat-grid-tile>
   <mat-grid-tile>
     <app-tab-list></app-tab-list>    

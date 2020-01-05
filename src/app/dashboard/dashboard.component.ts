@@ -15,26 +15,32 @@ import { Tab } from '../tabs/tab'
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  tabs: any[] = [];
-  guitarTabs: Array<Tab> = []
+  tabs: any[];
+  guitarTabs: Array<Tab>;
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private router: Router,
     private tabService: TabService
-    ) { }
+    ) {
+      this.getTabs()
+     }
     refresh(): void{
 
     }
     getTabs(){
+      this.tabs = []
+      this.guitarTabs = []
       this.tabService.getTabs().subscribe(
         (data) => {
           for (const tab of (data as any)) {
+            this.guitarTabs.push(new Tab(tab.name, tab.notes))
             this.tabs.push({
               notes: tab.notes,
               name:tab.name
             });
           }
+          console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
         },
         (err) => {  
           console.log(err);
@@ -42,20 +48,10 @@ export class DashboardComponent implements OnInit {
       );
     }
     getTab(){
+      console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
       return this.guitarTabs[0];
     }
     ngOnInit() {
-      this.getTabs()
-      this.generateTabArray();
+      
     }
-    generateTabArray(){
-      let tablature: Tab;
-      this.tabs.forEach(tab => {
-        tablature = new Tab(tab.name, tab.notes);
-        this.guitarTabs.push(tablature)
-      });
-
-      // this.getTab()
-    }
-
 }
