@@ -17,6 +17,10 @@ export class TabService {
     return this.http.get(this.tabsURL+'');
   }
 
+  postTab(tab: Tab){
+    return this.http.post(this.tabsURL+'create/', tab)
+  }
+
   add(message: string) {
     this.messageService.add(message);
     this.messages.push(message)

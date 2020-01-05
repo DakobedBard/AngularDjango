@@ -41,7 +41,16 @@ export class TabListComponent implements OnInit {
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
     this.messageService.setTab(this.guitarTabs[index])
-    
   }
-
+ createTab(){
+    let tab: Tab = new Tab("Tab Create from UI", [new NoteClass('2','G',1), new NoteClass('3','G',3)], 1);
+    this.tabService.postTab(tab).subscribe(
+      (data) => {
+        console.log("The data is " + data)
+      },
+      (err) => {  
+        console.log(err);
+      }
+    )
+  }
 }
