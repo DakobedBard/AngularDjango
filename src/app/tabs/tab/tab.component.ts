@@ -38,14 +38,18 @@ export class TabComponent implements OnInit {
     this.tab  = [
       {tab_string: '$4.7/9.$3.6/8.$2.5/7 9p7 $2.9.$3.9.$4.9 $4.7/9.$3.6/                               ||'},
     ];
-    let tablines = this.tabService.getTab().getLines()
-    tablines.forEach((line, index) => {
-      this.tab.push({
-        tab_string:line.toString()
-      })
-    });
-    jtab.render($('#mytab'),'Am7 C');
-    this.getTabs()
+    this. tablines = this.guitarTab.getLines()
+
+
+
+
+    // tablines.forEach((line, index) => {
+    //   this.tab.push({
+    //     tab_string:line.toString()
+    //   })
+    // });
+    // jtab.render($('#mytab'),'Am7 C');
+    // this.getTabs()
 
   };
 

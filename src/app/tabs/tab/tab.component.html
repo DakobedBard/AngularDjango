@@ -1,25 +1,11 @@
 <link type="text/css" rel="stylesheet" href="http://jtab.tardate.com/css/jtab-helper.css"/>
 
 <mat-card>
-  <!-- <mat-list style="padding-top: 135px; ">
-    <mat-list-item  *ngFor="let line of tab" style="padding-top: 15px;
-      padding-right: 30px;
-      padding-bottom: 50px;
-      padding-left: 4px;">
-      <app-tab-line [tab_string]= line.tab_string matLine>
-      </app-tab-line>
-    </mat-list-item>
-  </mat-list> -->
+<h1 style="text-align: center;">{{ guitarTab.name}} </h1>
 
-  <div *ngIf="messageService.messages.length">
-  <h2>Messages</h2>
-  <button class="clear"
-          (click)="messageService.clear()">clear</button>
-  <div *ngFor='let message of messageService.messages'> {{message}} </div>
-</div>
 <!-- {{ guitarTab.name }} tab Name -->
-<mat-list-item  *ngFor="let line of messageService.tab" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
-  <app-tab-line [tab_string]= line.tab_string matLine> </app-tab-line>
+<mat-list-item  *ngFor="let line of tablines" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
+  <app-tab-line [tab_string]= line.toString() matLine> </app-tab-line>
 </mat-list-item>
 <div id="mytab"></div>
 
