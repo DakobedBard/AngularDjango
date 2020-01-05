@@ -8,6 +8,7 @@ import { Router } from '@angular/router'
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { TabService } from '../tabs/tab.service';
 import { Tab } from '../tabs/tab'
+import { MessageService } from '../message.service'
  
 @Component({
   selector: 'app-dashboard',
@@ -21,13 +22,9 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private router: Router,
-    private tabService: TabService
-    ) {
-      this.getTabs()
-     }
-    refresh(): void{
+    private tabService: TabService,
+    private messageService: MessageService){}
 
-    }
     getTabs(){
       this.tabs = []
       this.guitarTabs = []
@@ -40,7 +37,8 @@ export class DashboardComponent implements OnInit {
               name:tab.name
             });
           }
-          console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
+          let tab1: Tab = this.tabs[0];
+          this.messageService.setTab(this.tabs[0])
         },
         (err) => {  
           console.log(err);
@@ -49,9 +47,11 @@ export class DashboardComponent implements OnInit {
     }
     getTab(){
       console.log("Lenght of guitar tabs is " + this.guitarTabs.length )
+      // this.messageService.setTab(this.guitarTabs[0])
       return this.guitarTabs[0];
     }
     ngOnInit() {
+      this.getTabs()
       
     }
 }

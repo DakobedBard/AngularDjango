@@ -16,7 +16,7 @@
 
   </mat-grid-tile   >
   <mat-grid-tile rowspan="2">
-    <div *ngIf="guitarTabs.length > 0">
+    <div *ngIf="guitarTabs.length > 0  && messageService.guitarTab">
       <app-tab [guitarTab]=getTab()>
       </app-tab>
     </div>

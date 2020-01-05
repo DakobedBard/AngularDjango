@@ -38,7 +38,7 @@ export class TabListComponent implements OnInit {
     let tab: Tab = new Tab("First Tab",noteArray )
     this.messageService.add("second message..")
     this.tabService.add("tab message..")
-    this.messageService.addTab(tab)
+    this.messageService.setTab(tab)
     
   }
 

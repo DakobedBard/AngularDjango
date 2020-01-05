@@ -1,9 +1,14 @@
-
-
 export class Tab{
     lines : TabLine[] = [];
-    constructor(private name:string,private notes: Array<NoteClass>){
+    strs : Array<string>;
+    constructor(public name:string,public notes: Array<NoteClass>){
+        this.strs = []
         this.generateLines()
+        this.generateStrings()
+        this.why()
+    }
+    public why(){
+      console.log("what is happening")
     }
     getName():string{
       return this.name
@@ -38,7 +43,6 @@ export class Tab{
         let measure = new Measure()
         let currentBeat = 0;
         let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
-        console.log("Max beats " + maximumBeats)
     
         map.forEach((noteArray,beat) => {
           if(beat>currentBeat){
@@ -61,7 +65,12 @@ export class Tab{
         let line = new TabLine(measures);
         this.lines.push(line)
     }
-    public getLines(){
+   generateStrings(){
+      this.lines.forEach(line => {
+        this.strs.push(line.toString())
+      });      
+    }
+  getLines(){
         return this.lines;
     }
 }
