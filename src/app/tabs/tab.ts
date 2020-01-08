@@ -4,19 +4,17 @@ export class Tab{
     
     beatsPerMeasure = 8;
     measuresPerLine = 4;
-
+    beatmap: Map<number, Array<NoteClass>>;
     nLines: number;
+    beatsperline:number = 64;
     nMeasures: number;
     strs : Array<string>;
     constructor(public name:string,public notes: Array<NoteClass>, public id:number){
         this.strs = []
-        this.generateLines()
-        this.generateStrings()
-        this.why()
+        this.generateTabStrings()
+
     }
-    public why(){
-      console.log("what is happening")
-    }
+
     getName():string{
       return this.name
     }
@@ -38,7 +36,88 @@ export class Tab{
     setNotes(notes:Array<NoteClass>){
         this.notes = notes;
         this.generateLines()
+    }
+
+    generateTabStrings(){
+
+      let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
+      this.nMeasures = Math.ceil(maximumBeats/8)
+      this.nLines = Math.ceil(this.nMeasures/4) 
+      
+      let beatsperline:number = 64;
+      let strings: Array<string>;
+
+      this.beatmap =  this.generateBeatMap()
+      let measures : Array<Measure>;
+      let index: number = 0;
+      
+      let lines: Array<Array<Measure>> = [];
+      for(let index:number = 0; index < this.nLines; index++){
+        measures = this.generateMeasures(this.beatmap,index);
+        this.strs.push(this.measuresToString(measures));
       }
+    }
+    measuresToString(measures: Array<Measure>):string{
+      let output: string = "";
+      measures.forEach(measures => {
+        output += measures.generateString();
+      });
+      return output
+    }
+    generateMeasures( beatMap: Map<number,Array<NoteClass>>, lineIndex:number):Array<Measure>{
+      let currentBeat: number = 0;
+      beatMap.forEach((notes: Array<NoteClass>, beat: number) => {
+      });
+      let measure: Measure = new Measure()
+      let measures: Array<Measure> = []
+      beatMap.forEach((noteArray,beat) => {
+        console.log("The beat is " + beat)
+        if( currentBeat > this.beatsperline *(1+1)){
+          console.log("The beat is " + beat)
+          return measures;
+        }
+        if(beat>currentBeat){
+          for (let i = 0; i < beat-currentBeat; i++) {
+            measure.addRest()
+            console.log("I get a rest ")
+            this.checkMeasure(measure, measures)
+            currentBeat++;
+          }
+        }
+      });
+      //   if( currentBeat > this.beatsperline *(1+1)){
+      //     return measures;
+      //   }
+      //   console.log("current beat " + currentBeat)
+      //   if(beat>currentBeat){
+      //     for (let i = 0; i < beat-currentBeat; i++) {
+      //       measure.addRest()
+      //       this.checkMeasure(measure, measures)
+      //       currentBeat++;
+      //     }
+      //   }
+      //   currentBeat = beat;
+      //   if(noteArray.length==1){
+      //     measure.addNote(noteArray[0]);
+      //     this.checkMeasure(measure, measures)
+      //     currentBeat++;
+      //   }else{
+      //     measure.addNotes(noteArray);
+      //     this.checkMeasure(measure, measures)
+      //     currentBeat++;
+      //   }
+      // });
+      return measures;
+    }
+
+    checkMeasure(measure: Measure, measures: Array<Measure>){
+      if(measure.isFull){
+        measures.push(measure)
+      }
+      // Returns true 
+    }
+
+
     generateBeatMap():Map<number, Array<NoteClass>>{
         let arr: NoteClass[];
         let beatMap = new Map<number, Array<NoteClass>>();
@@ -122,9 +201,10 @@ export class Measure{
       notes: NoteClass[] = [];
       outputString = "";
       constructor(){}
-  
+      nBeats: number = 0;
       addNote(note: NoteClass){
           this.notes.push(note);
+          this.nBeats++;
           this.outputString += `$${note.gString} ${note.fret}`;  
       }
       generateString(){
@@ -134,9 +214,14 @@ export class Measure{
         notes.forEach(note => {
           this.outputString += `$${note.gString}.${note.fret}.`
         });
+        this.nBeats++;
       }
       addRest(){
+        this.nBeats ++;
         this.outputString += " "
+      }
+      isFull():boolean{
+        return this.nBeats >= 8;
       }
   }
   
