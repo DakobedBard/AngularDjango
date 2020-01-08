@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Tab, TabLine , Measure, NoteClass} from './tabs/tab'
+import { Tab , NoteClass} from './tabs/tab'
 @Injectable({ providedIn: 'root' })
 export class MessageService {
   messages: string[] = [];
   guitarTab:Tab;
   tabName:string;
-  lines: Array<TabLine> = [];
-  tablines: TabLine[];
   strs: Array<string>;
   notes: Array<NoteClass> = []
   tabID: number;

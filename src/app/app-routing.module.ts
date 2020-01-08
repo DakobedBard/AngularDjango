@@ -6,7 +6,7 @@ import { DocumentDetailComponent }  from './document-detail/document-detail.comp
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import { HowlComponent } from './howl/howl.component';
-
+import { TabPracticeComponent } from './tabs/tab-practice/tab-practice.component';
 
 const routes: Routes = [                                  
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'howl', component: HowlComponent },
+  { path: 'tabs', component: TabPracticeComponent },
 
 ];
 

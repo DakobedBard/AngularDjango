@@ -24,7 +24,8 @@ import { DocumentListComponent } from './documents/document-list/document-list.c
 import { ChordLineComponent } from './tabs/chord-line/chord-line.component';
 import { TabPanelComponent } from './tabs/tab-panel/tab-panel.component';
 import { TabListComponent } from './tabs/tab-list/tab-list.component';
-import { TabCreateComponent } from './tabs/tab-create/tab-create.component'
+import { TabCreateComponent } from './tabs/tab-create/tab-create.component';
+import { TabPracticeComponent } from './tabs/tab-practice/tab-practice.component'
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { TabCreateComponent } from './tabs/tab-create/tab-create.component'
     TabPanelComponent,
     TabListComponent,
     TabCreateComponent,
+    TabPracticeComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -42,6 +42,9 @@ export class TabListComponent implements OnInit {
     this.messageService.setTab(this.guitarTabs[index])
     this.messageService.setEditMode(false);
   }
+  editTab(){
+    this.messageService.setEditMode(true);
+  }
  createTab(){
    this.messageService.setEditMode(true);
     // let tab: Tab = new Tab("Tab Create from UI", [new NoteClass('2','G',1), new NoteClass('3','G',3)], 1);
