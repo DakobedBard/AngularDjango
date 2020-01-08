@@ -4,9 +4,9 @@
 
 <h1>{{ tabName}} </h1>
 
-
+THere are {{strs.length}} strings
 <mat-list-item  *ngFor="let str of strs" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">
-  <!-- <app-tab-line [tab_string]= str matLine> </app-tab-line> -->
+  <app-tab-line [tab_string]= str matLine> </app-tab-line>
 </mat-list-item>
 <!-- 
 <mat-list-item  *ngFor="let line of messageService.strs" style="padding-top: 15px; padding-right: 30px; padding-bottom: 30px; padding-left: 4px;">

@@ -9,7 +9,7 @@ import { Tab } from '../tab'
 export class TabLineComponent implements OnInit {
   message: String;
   @Input() tab_string: string;
-  @Input() div: string;
+  // @Input() div: string;
   constructor() { }
 
   ngOnInit() {

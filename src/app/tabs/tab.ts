@@ -91,6 +91,8 @@ export class Tab{
    generateStrings(){
       this.lines.forEach(line => {
         this.strs.push(line.toString())
+        this.strs.push(line.toString())
+        this.strs.push(line.toString())
       });      
     }
   getLines(){
