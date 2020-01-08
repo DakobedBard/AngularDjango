@@ -1,5 +1,12 @@
 export class Tab{
     lines : TabLine[] = [];
+    beatsPerQuarterNote = 2;
+    
+    beatsPerMeasure = 8;
+    measuresPerLine = 4;
+
+    nLines: number;
+    nMeasures: number;
     strs : Array<string>;
     constructor(public name:string,public notes: Array<NoteClass>, public id:number){
         this.strs = []
@@ -15,6 +22,17 @@ export class Tab{
     }
     getNotes():Array<NoteClass>{
       return this.notes;
+    }
+    
+    addNote(note:NoteClass){
+      this.notes.push(note)
+      this.generateLines()
+    }
+    addNotes(notes:Array<NoteClass>){
+      notes.forEach(note => {
+        this.notes.push(note);
+      });
+      this.generateLines()
     }
 
     setNotes(notes:Array<NoteClass>){
@@ -43,7 +61,12 @@ export class Tab{
         let measure = new Measure()
         let currentBeat = 0;
         let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
-    
+        this.nMeasures = Math.ceil(maximumBeats/8)
+        this.nLines = Math.ceil(this.nMeasures/4) 
+        // console.log("There will be x number of measures " + this.nMeasures);
+        // console.log("There will be x number of lines " + this.nLines);
+        let enddBeatCurrentLine = this.nMeasures * this.beatsPerQuarterNote;
+        let measureIndex = 0;
         map.forEach((noteArray,beat) => {
           if(beat>currentBeat){
             for (let i = 0; i < beat-currentBeat; i++) {
