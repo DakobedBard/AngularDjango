@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TabService } from '../tab.service'
 import { MessageService } from '../../message.service'
-import { Tab, TabLine, NoteClass, Measure } from '../tab'
+import { Tab, NoteClass, Measure } from '../tab'
 declare const jtab: any;
 @Component({
   selector: 'app-tab',
@@ -12,8 +12,7 @@ export class TabComponent implements OnInit {
   tab;
   messages: any[] = [];
   notes: Array<NoteClass>;
-  lines : TabLine[] = [];
-  tablines: TabLine[];
+
   strs: Array<string>;
   tabs: any = [];
   constructor(private messageService: MessageService, private tabService: TabService) { 
