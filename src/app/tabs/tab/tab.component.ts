@@ -25,6 +25,7 @@ export class TabComponent implements OnInit {
       (err) => {  
         console.log(err);
       }
+    
     )
   }
 
