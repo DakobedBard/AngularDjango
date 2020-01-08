@@ -8,13 +8,15 @@ import { Tab } from '../tab'
 })
 export class TabLineComponent implements OnInit {
   message: String;
+  div: string = "#tabline"
   @Input() tab_string: string;
   // @Input() div: string;
   constructor() { }
 
   ngOnInit() {
+    let a: string = '#tabline'
     this.message = this.tab_string;
-    jtab.render($('#tabline'),this.tab_string);
+    jtab.render($(this.div),this.tab_string);
   }
 
 }

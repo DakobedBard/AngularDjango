@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tab, NoteClass } from  '../tab'
 import { TabService } from '../tab.service';
+declare const jtab: any;
 @Component({
   selector: 'app-tab-practice',
   templateUrl: './tab-practice.component.html',
@@ -9,6 +10,7 @@ import { TabService } from '../tab.service';
 export class TabPracticeComponent implements OnInit {
   strs: Array<string> = []
   constructor(private tabService: TabService) { }
+  letters = ['a','b','c','d','e','f','g','h','i'] // 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z']
   tabName: string;
   postTab(){
     let tab: Tab = new Tab("Tab Create from UI", 
@@ -38,6 +40,9 @@ export class TabPracticeComponent implements OnInit {
     ,new NoteClass('2','A',22), new NoteClass('3','D',24),new NoteClass('2','G',28), new NoteClass('2','G',32),new NoteClass('2','A',34), new NoteClass('4','D',36),new NoteClass('2','G',18), new NoteClass('3','G',20)],1)
   this.strs = tab.strs;
   this.tabName = tab.name;
+  this.strs.forEach((str,index) => {
+    jtab.render($(`#tabline${this.letters[index]}`),str);    
+  });
 
   }
 }
