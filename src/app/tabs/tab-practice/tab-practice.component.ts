@@ -37,31 +37,59 @@ export class TabPracticeComponent implements OnInit {
     tab.addNote("4","G",6)
     tab.addNote("3","G",7)
     tab.addNote("2","G",8)
-    tab.addNote("1","G",9)
+    tab.addNote("1","E",9)
     tab.addNote("2","G",10)
-    tab.addNote("3","G",12)
+    tab.addNote("3","D",12)
     tab.addNote("4","G",13)
-    tab.addNote("5","G",14)
+    tab.addNote("5","D",14)
     tab.addNote("6","G",15)
-    tab.addNote("7","G",16)
+    tab.addNote("7","A",16)
     tab.addNote("8","G",17)
-    tab.addNote("8","G",18)
-    tab.addNote("8","G",20)
+    tab.addNote("9","D",19)
+    tab.addNote("10","A",20)
     tab.addNote("8","G",22)
-    tab.addNote("8","G",24)
-
-
+    tab.addNote("8","G",23)
+    tab.addNote("4","A",24)
+    tab.addNote("7","G",25)
+    tab.addNote("8","G",26)
+    tab.addNote("5","G",27)
+    tab.addNote("4","D",28)
+    tab.addNote("3","A",29)
+    tab.addNote("4","G",30)
+    tab.addNote("5","D",31)
+    tab.addNote("6","G",32)
+    tab.addNote("7","A",33)
+    tab.addNote("8","G",35)
+    tab.addNote("9","D",35)
+    tab.addNote("10","A",36)
+    tab.addNote("8","A",38)
+    tab.addNote("8","G",39)
+    tab.addNote("4","A",40)
+    tab.addNote("3","G",41)
+    tab.addNote("3","G",42)
+    tab.addNote("5","B",43)
+    tab.addNote("4","B",44)
+    tab.addNote("3","B",45)
+    tab.addNote("4","B",46)
 
     tab.generate()
+    tab.generateStrings()
     // [new NoteClass('2','G',1), new NoteClass('3','G',3),new NoteClass('2','G',1), new NoteClass('3','A',4),new NoteClass('2','G',6), new NoteClass('3','G',8)
     // ,new NoteClass('2','A',8), new NoteClass('3','D',10),new NoteClass('2','G',12), new NoteClass('3','G',14),new NoteClass('2','A',16), new NoteClass('3','D',17),new NoteClass('2','G',18), new NoteClass('3','G',20)
     // ,new NoteClass('2','A',22), new NoteClass('3','D',24),new NoteClass('2','G',28), new NoteClass('2','G',32),new NoteClass('2','A',34), new NoteClass('4','D',36),new NoteClass('2','G',42), new NoteClass('3','G',46),
     // new NoteClass('2','G',48), new NoteClass('3','G',50),new NoteClass('2','G',52), new NoteClass('3','A',53),new NoteClass('2','G',58), new NoteClass('3','G',62)],1)
   this.strs = tab.strs;
   this.tabName = tab.name;
+
   this.strs.forEach((str,index) => {
-    jtab.render($(`#tabline${this.letters[index]}`),str);    
+    console.log("The " + index + " string is : " + str)
   });
+  console.log("")
+
+  // this.strs.forEach((str,index) => {
+  //   console.log("The div is " + `#tabline${this.letters[index]}`)
+  //   jtab.render($(`#tabline${this.letters[index]}`),str);    
+  // });
 
   }
 }
