@@ -1,4 +1,5 @@
 import { TabLineComponent } from './tab-line/tab-line.component';
+import { Output } from '@angular/core';
 
 export class Tab{
 
@@ -15,19 +16,6 @@ export class Tab{
         this.strs = []
 
     }
-    addNote(fret: string, gString: string, beat: number){
-      this.notes.push(new NoteClass(fret,gString,beat))
-    }
-    getName():string{
-      return this.name
-    }
-    getNotes():Array<NoteClass>{
-      return this.notes;
-    }
-
-    setNotes(notes:Array<NoteClass>){
-        this.notes = notes;
-    }
 
     generate(){
       let maximumBeats = Math.max.apply(Math, this.notes.map(function(note) { return note.beat; }))
@@ -38,25 +26,34 @@ export class Tab{
       
       let nLines:number = Math.ceil( maximumBeats/32) 
       // console.log("maxbeats " + maximumBeats)
-      // console.log("nlines: " + nLines)
+
       for(let i=0;i<nLines;i++){
-        // console.log("hello " + i )
-        for(let currentBeat = i*32; currentBeat < 32+(1+i); currentBeat ++){
+
+        for(let currentBeat = i*32; currentBeat < 32*(1+i); currentBeat ++){
           // console.log("The current beat is " + currentBeat)
-          
           try{
             measure.addNotes(beatmap.get(currentBeat), currentBeat)
-            console.log("I'm at beat " + currentBeat + " with a note  " + beatmap.get(currentBeat)[0].fret + " and a gstring of " + beatmap.get(currentBeat)[0].gString )
+            // console.log("I'm at beat " + currentBeat + " with a note  " + beatmap.get(currentBeat)[0].fret + " and a gstring of " + beatmap.get(currentBeat)[0].gString )
           }
           catch{
             measure.addRest(currentBeat);
           }
           measure = this.pushMeasureIfFull(measures,measure,currentBeat);
         }
+        // console.log("Line " + i + " looks like " + this.generateMeasureString(measures))
+        console.log()
         tablines.push(new Tabline(measures));
+        measures = []
       }
       this.tablines = tablines
       // this.strs.push(this.measuresToString(measures)); 
+    }
+    generateMeasureString(measures: Array<Measure> ){
+      let output:string = ""
+      measures.forEach( measure=> {
+        output += measure.generateString();
+      });
+      return output;
     }
 
     generateBeatMap():Map<number, Array<NoteClass>>{
@@ -74,23 +71,44 @@ export class Tab{
           beatMap.set(note.beat,arr)
         } 
       });
+      beatMap.forEach((value:Array<NoteClass>,key:Number) => {
+        // console.log("I'm at beat " + key)
+      });
       return beatMap
     }
 
     pushMeasureIfFull(measures: Array<Measure>, measure: Measure, beat:number): Measure{
-      
       if(measure.isFull()){
         measures.push(measure)
         return new Measure(); 
       }
       return measure;
     }
+
     generateStrings(){
       this.strs = []
       this.tablines.forEach(tabline => {
+        // console.log("THe tabe line looks like " + tabline)
         this.strs.push(tabline.toString())
       });
     }
+
+    addNote(fret: string, gString: string, beat: number){
+      this.notes.push(new NoteClass(fret,gString,beat))
+    }
+
+    getName():string{
+      return this.name
+    }
+    getNotes():Array<NoteClass>{
+      return this.notes;
+    }
+
+    setNotes(notes:Array<NoteClass>){
+        this.notes = notes;
+    }
+
+
 }
 
 export class Tabline{
@@ -108,11 +126,29 @@ export class Tabline{
   toString():string{
     let output: string = "";
     this.measures.forEach((measure,index) => {
-        output += measure.generateString();
+        if(measure.notes.length==0){
+          output += "            |";
+          output = this.endofMeasure(this.measures.length,index,output, true)
+        }else{
+          output += measure.generateString();
+          output = this.endofMeasure(this.measures.length,index,output, false)      
+        }
     });
     return output
   }
+  endofMeasure(measuresLength:number , index:number, output:string, isEmpty: boolean){
+    if(index==measuresLength-1){
+      if(isEmpty){                // This is an edge case since I render empty measures differently 
+        return output +"|"
+      }
+      let a = output.slice(0,-3)
+      return a + " ||"
+    }else{
+      return output
+    }
+  }
 }
+
 
 export class Measure{
       notes: NoteClass[] = [];
@@ -124,6 +160,7 @@ export class Measure{
           return this.outputString;
       }
       addNotes(notes: Array<NoteClass>, beat:number){
+        // console.log("I'm adding a note at " + beat + "on string: " + notes[0].gString + " and on fret " + notes[0].fret)
         if(notes.length==1){
           this.notes.push(notes[0]);
           this.outputString += `$${notes[0].gString} ${notes[0].fret} `;  
@@ -138,7 +175,7 @@ export class Measure{
 
       addRest(beat: number){
         this.nBeats ++;
-        this.outputString += " "
+        this.outputString += "  "
       }
       isFull():boolean{
         if(this.nBeats >=8 ){
