@@ -83,9 +83,12 @@ export class TabPracticeComponent implements OnInit {
 
   this.strs.forEach((str,index) => {
     console.log("The " + index + " string is : " + str)
+    jtab.render($(`#tabline${this.letters[index]}`),this.strs[0]);
   });
   console.log("")
-
+  // jtab.render($(`#tabline${'a'}`),this.strs[0]);
+  // jtab.render($(`#tabline${'b'}`),this.strs[0]);
+  // jtab.render($('#mytab'),'Am7 C');    
   // this.strs.forEach((str,index) => {
   //   console.log("The div is " + `#tabline${this.letters[index]}`)
   //   jtab.render($(`#tabline${this.letters[index]}`),str);    
