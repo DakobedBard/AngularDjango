@@ -86,12 +86,48 @@ export class Tab{
     }
 
     generateStrings(){
-      this.strs = []
+      let strs: Array<string> = []
+
+      let str:string;
       this.tablines.forEach(tabline => {
         // console.log("THe tabe line looks like " + tabline)
-        this.strs.push(tabline.toString())
+        let str = tabline.toString()
+        strs.push(str)
       });
+      this.strs =  this.validateStrings(strs)
     }
+    validateStrings(strs:Array<string>){
+      let highestNumber: number = 0;
+      let i: number = 0;
+
+      strs.forEach((str,index) => {
+        console.log("the string length is " + str.length)
+        if(str.length > highestNumber){
+
+          highestNumber = str.length
+          i = index
+        }
+      });
+      console.log("THe longest string is " + i)
+      let diff:number;
+      let appendedString: string;
+      strs.forEach((str,index) => {
+        if(index==i){
+
+        }else{
+          diff = strs[i].length - str.length
+          appendedString = str.slice(0,-1)
+          for(let k=0; k < diff;k++){
+            appendedString += " "
+          }
+          appendedString += " ||"
+          // strs[index] = appendedString
+        }
+      });
+      return strs
+    }
+
+
 
     addNote(fret: string, gString: string, beat: number){
       this.notes.push(new NoteClass(fret,gString,beat))
@@ -165,8 +201,11 @@ export class Measure{
           this.notes.push(notes[0]);
           this.outputString += `$${notes[0].gString} ${notes[0].fret} `;  
         }else{
-          notes.forEach(note => {
+          notes.forEach((note,index) => {
             this.outputString += `$${note.gString}.${note.fret}.`
+            if(index==notes.length-1){
+              this.outputString += `$${note.gString}.${note.fret}. `
+            }
           });
           this.outputString+= " "
         }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tab, NoteClass } from  '../tab'
 import { TabService } from '../tab.service';
 declare const jtab: any;
+declare const Vex: any;
 @Component({
   selector: 'app-tab-practice',
   templateUrl: './tab-practice.component.html',
@@ -27,10 +28,16 @@ export class TabPracticeComponent implements OnInit {
       console.log(err);
     })
   }
+  public VF;
   ngOnInit() {
     let tab: Tab = new Tab("Tab Create from UI",[],1)
-    tab.addNote("1","G",1)
+    tab.addNote("0","A",0)
+    tab.addNote("0","G",0)
+    tab.addNote("1","A",1)
+    // tab.addNote("2","A",1)
     tab.addNote("2","A",2)
+    tab.addNote("3","G",2)
+
     tab.addNote("3","D",3)
     tab.addNote("4","D",4)
     tab.addNote("5","A",5)
@@ -57,11 +64,17 @@ export class TabPracticeComponent implements OnInit {
     tab.addNote("3","A",29)
     tab.addNote("4","G",30)
     tab.addNote("5","D",31)
-    tab.addNote("6","G",32)
+    tab.addNote("5","G",31)
+    
+    tab.addNote("6","A",32)
+    tab.addNote("5","D",32)
+
     tab.addNote("7","A",33)
+    tab.addNote("7","A",34)
     tab.addNote("8","G",35)
     tab.addNote("9","D",35)
     tab.addNote("10","A",36)
+    tab.addNote("7","A",37)
     tab.addNote("8","A",38)
     tab.addNote("8","G",39)
     tab.addNote("4","A",40)
@@ -85,14 +98,23 @@ export class TabPracticeComponent implements OnInit {
     console.log("The " + index + " string is : " + str)
     jtab.render($(`#tabline${this.letters[index]}`),this.strs[index]);
   });
-  console.log("")
-  // jtab.render($(`#tabline${'a'}`),this.strs[0]);
-  // jtab.render($(`#tabline${'b'}`),this.strs[0]);
-  // jtab.render($('#mytab'),'Am7 C');    
-  // this.strs.forEach((str,index) => {
-  //   console.log("The div is " + `#tabline${this.letters[index]}`)
-  //   jtab.render($(`#tabline${this.letters[index]}`),str);    
-  // });
+  var div = document.getElementById("vexflow-player")
+
+  var vf = new Vex.Flow.Factory({
+    renderer: {elementId: 'boo', width: 500, height: 200}
+  });
+    
+  var score = vf.EasyScore();
+  var system = vf.System();
+  
+  system.addStave({
+    voices: [
+      score.voice(score.notes('C#5/q, B4, A4, G#4', {stem: 'up'})),
+      score.voice(score.notes('C#4/h, C#4', {stem: 'down'}))
+    ]
+  }).addClef('treble').addTimeSignature('4/4');
+  
+  vf.draw();
 
   }
 }
