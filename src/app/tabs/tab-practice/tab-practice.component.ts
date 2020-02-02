@@ -97,27 +97,32 @@ export class TabPracticeComponent implements OnInit {
   // Create an SVG renderer and attach it to the DIV element named "boo".
   var div = document.getElementById("boo")
   var renderer = new this.VF.Renderer(div, this.VF.Renderer.Backends.SVG);
-  // Size our svg:
-  renderer.resize(500, 500);
-  // And get a drawing context:
-  var context = renderer.getContext();
-  var stave = new this.VF.TabStave(10, 40, 400);
-  stave.addClef("tab").setContext(context).draw();
-  var notes = [
-  // A single note
-  new this.VF.TabNote({
-    positions: [{str: 3, fret: 7}],
-    duration: "q"}),
-  // A chord with the note on the 3rd string bent
-  new this.VF.TabNote({
-    positions: [{str: 2, fret: 10},
+  // Create a tab stave of width 400 at position 10, 40 on the canvas.
+var stave = new this.VF.TabStave(10, 40, 400);
+var stave2 = new this.VF.TabStave(10, 140, 400);
+// Size our svg:
+renderer.resize(500, 500);
+
+// And get a drawing context:
+var context = renderer.getContext();
+stave.addClef("tab").setContext(context).draw();
+stave2.addClef("tab").setContext(context).draw();
+var notes = [
+    // A single note
+    new this.VF.TabNote({
+      positions: [{str: 3, fret: 7}],
+      duration: "q"}),
+    // A chord with the note on the 3rd string bent
+    new this.VF.TabNote({
+      positions: [{str: 2, fret: 10},
                 {str: 3, fret: 9}],
-    duration: "q"}),
-  // A single note with a harsh vibrato
-  new this.VF.TabNote({
-    positions: [{str: 2, fret: 5}],
-    duration: "h"})
-  ];
-  this.VF.Formatter.FormatAndDraw(context, stave, notes);
+      duration: "q"}),
+    // A single note with a harsh vibrato
+    new this.VF.TabNote({
+      positions: [{str: 2, fret: 5}],
+      duration: "h"})
+    ];
+    this.VF.Formatter.FormatAndDraw(context, stave, notes);
   }
 }
+
