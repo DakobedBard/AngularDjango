@@ -91,30 +91,33 @@ export class TabPracticeComponent implements OnInit {
     // ,new NoteClass('2','A',8), new NoteClass('3','D',10),new NoteClass('2','G',12), new NoteClass('3','G',14),new NoteClass('2','A',16), new NoteClass('3','D',17),new NoteClass('2','G',18), new NoteClass('3','G',20)
     // ,new NoteClass('2','A',22), new NoteClass('3','D',24),new NoteClass('2','G',28), new NoteClass('2','G',32),new NoteClass('2','A',34), new NoteClass('4','D',36),new NoteClass('2','G',42), new NoteClass('3','G',46),
     // new NoteClass('2','G',48), new NoteClass('3','G',50),new NoteClass('2','G',52), new NoteClass('3','A',53),new NoteClass('2','G',58), new NoteClass('3','G',62)],1)
-  this.strs = tab.strs;
-  this.tabName = tab.name;
+// Create a tab stave of width 400 at position 10, 40 on the canvas.
 
-  this.strs.forEach((str,index) => {
-    console.log("The " + index + " string is : " + str)
-    jtab.render($(`#tabline${this.letters[index]}`),this.strs[index]);
-  });
-  var div = document.getElementById("vexflow-player")
-
-  var vf = new Vex.Flow.Factory({
-    renderer: {elementId: 'boo', width: 500, height: 200}
-  });
-    
-  var score = vf.EasyScore();
-  var system = vf.System();
-  
-  system.addStave({
-    voices: [
-      score.voice(score.notes('C#5/q, B4, A4, G#4', {stem: 'up'})),
-      score.voice(score.notes('C#4/h, C#4', {stem: 'down'}))
-    ]
-  }).addClef('treble').addTimeSignature('4/4');
-  
-  vf.draw();
-
+  this.VF = Vex.Flow;
+  // Create an SVG renderer and attach it to the DIV element named "boo".
+  var div = document.getElementById("boo")
+  var renderer = new this.VF.Renderer(div, this.VF.Renderer.Backends.SVG);
+  // Size our svg:
+  renderer.resize(500, 500);
+  // And get a drawing context:
+  var context = renderer.getContext();
+  var stave = new this.VF.TabStave(10, 40, 400);
+  stave.addClef("tab").setContext(context).draw();
+  var notes = [
+  // A single note
+  new this.VF.TabNote({
+    positions: [{str: 3, fret: 7}],
+    duration: "q"}),
+  // A chord with the note on the 3rd string bent
+  new this.VF.TabNote({
+    positions: [{str: 2, fret: 10},
+                {str: 3, fret: 9}],
+    duration: "q"}),
+  // A single note with a harsh vibrato
+  new this.VF.TabNote({
+    positions: [{str: 2, fret: 5}],
+    duration: "h"})
+  ];
+  this.VF.Formatter.FormatAndDraw(context, stave, notes);
   }
 }
