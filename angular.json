@@ -28,7 +28,8 @@
             ],
             "scripts": ["src/js/jquery.js",
               "src/js/raphael.js",
-              "src/js/jtab.js"
+              "src/js/jtab.js",
+              "./node_modules/vexflow/releases/vexflow-min.js"
             ]
           },
           "configurations": {
