@@ -47,14 +47,14 @@ export class TabListComponent implements OnInit {
   }
  createTab(){
    this.messageService.setEditMode(true);
-    // let tab: Tab = new Tab("Tab Create from UI", [new NoteClass('2','G',1), new NoteClass('3','G',3)], 1);
-    // this.tabService.postTab(tab).subscribe(
-    //   (data) => {
-    //     console.log("The data is " + data)
-    //   },
-    //   (err) => {  
-    //     console.log(err);
-    //   }
-    // )
+    let tab: Tab = new Tab("Tab Create from UI", [new NoteClass('2','G',1), new NoteClass('3','G',3)], 1);
+    this.tabService.postTab(tab).subscribe(
+      (data) => {
+        console.log("The data is " + data)
+      },
+      (err) => {  
+        console.log(err);
+      }
+    )
   }
 }

@@ -4,8 +4,6 @@ This file contains functions which will parse the JAMS json data into pandas dat
 
 '''
 
-
-
 import os
 import jams
 import pandas as pd
