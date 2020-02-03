@@ -5,18 +5,18 @@ export class MessageService {
   messages: string[] = [];
   guitarTab:Tab;
   tabName:string;
-  strs: Array<string>;
+  strs: Array<string> = [];
   notes: Array<NoteClass> = []
   tabID: number;
 
-  editTabMode: boolean = false;
+  editTabMode: boolean = true;
 
   constructor(){}
   add(message: string) {
     this.messages.push(message);
   }
   setTab(tab: Tab){
-    console.log("the strs are " + tab.strs)
+
     this.strs = tab.strs;
     this.guitarTab = tab;
     this.tabName = tab.name;
