@@ -25,3 +25,7 @@ app/products/migrations*
 app/tabs/migrations/*
 /venv/*
 
+
+
+angularmir/node_modules/*
+oldangular/node_modules/*

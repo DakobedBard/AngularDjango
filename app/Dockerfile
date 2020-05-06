@@ -35,7 +35,7 @@ run pip install django-cors-headers
 run pip install django-storages
 
 run pip install djangorestframework
-COPY ./runtests.py /usr/src/app/runtests.py
+#COPY ./runtests.py /usr/src/app/runtests.py
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 # copy project
 COPY . /usr/src/app/
